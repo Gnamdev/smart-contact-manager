@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+<head>
+  <title data-th-text="${loggedInUser.getFirstName()}+' |  SCM'">Dashboard Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-y: hidden; /* Prevent vertical scrolling */
+      height: 100%; /* Ensure the body takes full height */
+    }
+    .container {
+      box-sizing: border-box; /* Ensure padding/borders are included in width/height */
+      min-height: 100vh; /* Ensure container takes at least the full viewport height */
+    }
+    .content-wrapper {
+      height: 100%; /* Ensure content fits within the container */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body class="bg-white dark:bg-gray-900">
+  <div id="content" class="container">
+    <!-- sidebar -->
+    <!-- user is logged in : sidebar -->
+    <div th:if="${loggedInUser}">
+      <div data-th-replace="~{user/sidebar :: sidebar}"></div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="sm:pl-64 pt-3" style="height: 800px;">
+        <div th:replace="~{Message::message}"></div>    
+        <div class="flex justify-center flex-col items-center pt-20">
+          <div class="ml-16 inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
+            <div class="w-full max-w-lg bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 flex flex-col h-full">
+              <!-- Close button -->
+              <a data-th-href="@{'/user/profile'}">
+                <i
+                  class="fa-regular float-right dark:text-gray-300 fa-circle-xmark text-3xl text-gray-500 transform hover:rotate-90 hover:scale-110 transition duration-200 ease-in-out"
+                ></i>
+              </a>
+
+              <div class="my-8 text-center">
+                <h4 class="text-3xl text-gray-800 dark:text-white font-extrabold">Update Profile</h4>
+                <p class="text-sm text-gray-500 dark:text-gray-300 mt-4">Please provide the correct information!</p>
+              </div>
+
+              <form th:object="${userForm}" class="space-y-6 flex flex-col flex-grow" th:action="@{'/user/profile/update/' + ${userId}}" method="post" enctype="multipart/form-data">
+                <!-- Name field -->
+                <div class="relative flex flex-col">
+                  <input th:field="*{name}" type="text" placeholder="Enter Name" class="px-4 py-3 bg-white dark:bg-gray-700 dark:text-white text-gray-800 w-full text-sm border border-gray-300 dark:border-gray-600 focus:border-blue-600 dark:focus:border-blue-500 outline-none rounded-lg" />
+                  <div class="text-red-500 mt-1" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Invalid Name</div>
+                </div>
+                
+                <!-- Last name field -->
+                <div class="relative flex flex-col">
+                  <input th:field="*{lastName}" type="text" placeholder="Enter Last Name" class="px-4 py-3 bg-white dark:bg-gray-700 dark:text-white text-gray-800 w-full text-sm border border-gray-300 dark:border-gray-600 focus:border-blue-600 dark:focus:border-blue-500 outline-none rounded-lg" />
+                  <div class="text-red-500 mt-1" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Invalid Last Name</div>
+                </div>
+                
+                <!-- Email field -->
+                <div class="relative flex flex-col">
+                  <input th:field="*{email}" type="email" placeholder="Enter Email" class="px-4 py-3 bg-white dark:bg-gray-700 dark:text-white text-gray-800 w-full text-sm border border-gray-300 dark:border-gray-600 focus:border-blue-600 dark:focus:border-blue-500 outline-none rounded-lg" />
+                  <i class="fa-regular fa-envelope text-gray-400 dark:text-gray-300 absolute right-4 top-1/2 transform -translate-y-1/2"></i>
+                  <div class="text-red-500 mt-1" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Invalid Email</div>
+                </div>
+
+                <!-- About textarea -->
+                <div class="relative flex flex-col">
+                  <textarea th:field="*{about}" placeholder="Tell us about yourself" rows="4" class="px-4 py-3 bg-white dark:bg-gray-700 dark:text-white text-gray-800 w-full text-sm border border-gray-300 dark:border-gray-600 focus:border-blue-600 dark:focus:border-blue-500 outline-none rounded-lg"></textarea>
+                  <div class="text-red-500 mt-1" th:if="${#fields.hasErrors('about')}" th:errors="*{about}">Invalid About</div>
+                </div>
+                
+                <!-- Picture upload -->
+                <div class="relative flex flex-col">
+                  <input th:field="*{picture}" type="file" class="block w-full text-sm text-gray-900 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none" id="file_input" />
+                </div>
+
+                <!-- Phone number -->
+                <div class="relative flex flex-col">
+                  <input th:field="*{phoneNumber}" type="text" class="px-4 py-3 bg-white dark:bg-gray-700 dark:text-white text-gray-800 w-full text-sm border border-gray-300 dark:border-gray-600 focus:border-blue-600 dark:focus:border-blue-500 outline-none rounded-lg" placeholder="123-456-789" />
+                  <div class="text-red-500 mt-1" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">phoneNumber is required</div>
+                </div>
+
+                <!-- Save button -->
+                <div class="relative flex justify-center items-center mt-auto">
+                  <button type="submit" class="px-4 py-3 bg-blue-500 dark:bg-blue-600 text-white text-lg font-medium rounded-lg hover:bg-blue-600 dark:hover:bg-blue-700 transition duration-200">Save</button>
+                </div> 
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+  </body>
+</html>

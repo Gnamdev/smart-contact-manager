@@ -1,20 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title})}">
+<html
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+>
   <head>
-    <title data-th-text="'Add-Contects | SCM'"></title>
+    <title th:text="'Add-Contacts | SCM'"></title>
   </head>
   <body>
-    <!-- sidebar -->
-
-    <!-- user is logged in : sidebar -->
-
     <div id="content">
-      <!-- sidebar -->
-
-      <!-- user is logged in : sidebar -->
-
       <div th:if="${loggedInUser}">
-        <div data-th-replace="~{user/sidebar :: sidebar}"></div>
+        <div th:replace="~{user/sidebar :: sidebar}"></div>
       </div>
 
       <div class="sm:pl-64 pt-20" style="height: 2000px">
@@ -22,11 +17,9 @@
           <div class="col-span-3"></div>
           <div class="col-span-12 md:col-span-6 pt-10">
             <div
-              class="card block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+              class="card block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600"
             >
-            <div th:replace="~{Message::message}">
-
-            </div>
+              <div th:replace="~{Message::message}"></div>
               <h1 class="text-2xl text-center text-green-600 font-semibold">
                 Add New Contact
               </h1>
@@ -37,43 +30,38 @@
 
               <form
                 class="mt-8"
-                data-th-action="@{'/user/contacts/processForm'}"
-                data-th-object="${contactForm}"
+                th:action="@{/user/contacts/processForm}"
+                th:object="${contactForm}"
                 method="post"
                 enctype="multipart/form-data"
-              
               >
                 <div class="mb-6">
                   <!-- name form -->
                   <label
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >Contact Name
-                  </label>
-
+                    >Contact Name</label
+                  >
                   <div class="relative mb-2">
                     <div
                       class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
                     >
                       <i class="fa-regular w-4 h-4 fa-user"></i>
                     </div>
-
                     <input
                       type="text"
-                      data-th-field="*{name}"
+                      th:field="*{name}"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Enter Contact Name"
                     />
                   </div>
-                
-                
-                  <!-- <p
-                  class="text-red-500 px-1"
-                  th:if="${#fields.hasErrors('name')}"
-                  th:errors="*{name}"
-                >
-                  Invalid Name
-                </p> -->
-                 
+                  <div
+                    class="text-red-500 px-1"
+                    th:if="${#fields.hasErrors('name')}"
+                    th:errors="*{name}"
+                  >
+                    Invalid Name
+                  </div>
+                </div>
 
                 <div class="mb-6">
                   <!-- email form -->
@@ -103,24 +91,23 @@
                     </div>
                     <input
                       type="text"
-                      data-th-field="*{email}"
+                      th:field="*{email}"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="name@flowbite.com"
                     />
                   </div>
-                  <!-- <p
-                  data-th-if="${#fields.hasErrors('email')}"
-                  data-th-errors="*{email}"
-                  class="text-red-500 px-1 py-2"
-                >
-                  email is required
-                </p>
-                  -->
+                  <p
+                    th:if="${#fields.hasErrors('email')}"
+                    th:errors="*{email}"
+                    class="text-red-500 px-1 py-2"
+                  >
+                    email is required
+                  </p>
                 </div>
-                
-              
-              
-              <!-- phone number  -->
+
+                <!-- other fields -->
+
+                <!-- phone number  -->
                 <div class="mb-6">
                   <label
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -133,55 +120,50 @@
                       <i class="fa-solid w-4 h-4 fa-phone"></i>
                     </div>
                     <input
-                      data-th-field="*{phoneNumber}"
+                      th:field="*{phoneNumber}"
                       type="text"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="123-456-789"
                     />
-                 
                   </div>
-
-                  <!-- <p
-                    data-th-if="${#fields.hasErrors('phoneNumber')}"
-                    data-th-errors="*{phoneNumber}"
+                  <p
+                    th:if="${#fields.hasErrors('phoneNumber')}"
+                    th:errors="*{phoneNumber}"
                     class="text-red-500 px-1 py-2"
                   >
                     phoneNumber is required
-                  </p> -->
+                  </p>
                 </div>
 
                 <!-- address -->
-
                 <div class="mb-3">
                   <label
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >Contact Address</label
                   >
                   <textarea
-                    data-th-field="*{address}"
+                    th:field="*{address}"
                     rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Address of the contact"
                   ></textarea>
-<!-- 
                   <p
-                    data-th-if="${#fields.hasErrors('address')}"
-                    data-th-errors="*{address}"
+                    th:if="${#fields.hasErrors('address')}"
+                    th:errors="*{address}"
                     class="text-red-500 px-1 py-2"
                   >
                     address is required
-                  </p> -->
+                  </p>
                 </div>
 
                 <!-- description -->
-
                 <div class="mb-3">
                   <label
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >Contact Description</label
                   >
                   <textarea
-                    data-th-field="*{description}"
+                    th:field="*{description}"
                     rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Write about your contact"
@@ -191,7 +173,7 @@
                 <!-- social links -->
                 <div class="flex space-x-3 mb-3">
                   <div class="w-full">
-                    <!-- website  link  -->
+                    <!-- website link -->
                     <div class="mb-3">
                       <div class="relative mb-6">
                         <div
@@ -200,15 +182,15 @@
                           <i class="fa-solid w-4 h-4 fa-earth-americas"></i>
                         </div>
                         <input
-                          data-th-field="*{websiteLink}"
+                          th:field="*{websiteLink}"
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          placeholder="htts://goutamnamdev.com"
+                          placeholder="https://example.com"
                         />
                       </div>
                     </div>
                   </div>
                   <div class="w-full">
-                    <!-- linkedin  link  -->
+                    <!-- linkedin link -->
                     <div class="mb-3">
                       <div class="relative mb-6">
                         <div
@@ -217,30 +199,28 @@
                           <i class="fa-brands w-4 h-4 fa-linkedin"></i>
                         </div>
                         <input
-                          data-th-field="*{linkedInLink}"
+                          th:field="*{linkedInLink}"
                           type="text"
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          placeholder="htts://google.com/"
+                          placeholder="https://linkedin.com/in/username"
                         />
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- contact image field  -->
-                 
+                <!-- contact image field -->
                 <div class="mb-3">
                   <label
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >Contact Image</label
                   >
                   <input
-                    data-th-field="*{contactImage}"
+                    th:field="*{contactImage}"
                     id="image_file_input"
                     class="block w-full mb-2 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                     type="file"
                   />
-
                   <img
                     class="max-h-52 mx-auto rounded-lg shadow m-3"
                     src=""
@@ -250,16 +230,15 @@
                 </div>
 
                 <!-- favorite checkbox -->
-
                 <div class="flex items-center mb-3">
                   <input
-                    data-th-field="*{favorite}"
+                    th:field="*{favorite}"
                     type="checkbox"
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >Is this contact is your favorite one ?</label
+                    >Is this contact your favorite one?</label
                   >
                 </div>
 
@@ -285,6 +264,8 @@
         </div>
       </div>
     </div>
+
+    <script data-th-src="@{'/js/admin.js'}"></script>
 
     <script>
       console.log("this is profile page");

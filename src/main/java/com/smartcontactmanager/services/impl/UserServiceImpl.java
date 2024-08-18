@@ -3,7 +3,9 @@ package com.smartcontactmanager.services.impl;
 import com.smartcontactmanager.Entity.User;
 import com.smartcontactmanager.Error.ResourcesNotFoundException;
 import com.smartcontactmanager.Helper.AppConstants;
+import com.smartcontactmanager.Helper.CurrentUser;
 import com.smartcontactmanager.repositories.UserRepo;
+import com.smartcontactmanager.services.EmailService;
 import com.smartcontactmanager.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserServices {
@@ -20,27 +23,45 @@ public class UserServiceImpl implements UserServices {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private EmailService emailService;
+
     @Override
     public User saveUser(User user) {
 
         user.setRolesList(List.of(AppConstants.ROLE_USER));
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        return userRepo.save(user);
+
+        // mail send to person
+
+        String emailToken = UUID.randomUUID().toString();
+
+        user.setEmailToken(emailToken);
+        User saveUser = userRepo.save(user);
+
+        String emailLink = CurrentUser.getLinkForEmailVerificatiton(emailToken);
+
+        emailService.sendMail(saveUser.getEmail(), "Verify Account : Smart Contact Manager ", emailLink);
+
+        return saveUser;
+
     }
 
     @Override
     public Optional<User> updateUser(User user) {
         User userfound = userRepo.findById(user.getUserId())
-                .orElseThrow(() -> new ResourcesNotFoundException("User Not Found"));
+                .orElseThrow(() -> new ResourcesNotFoundException("User Not update because user not Found"));
 
         userfound.setFirstName(user.getFirstName());
         userfound.setLastName(user.getLastName());
         userfound.setEmail(user.getEmail());
         userfound.setPassword(user.getPassword());
         userfound.setPhoneNumber(user.getPhoneNumber());
-        userfound.setProfilePic(user.getProfilePic());
+        userfound.setPicture(user.getPicture());
         userfound.setEmailVerified(user.isEmailVerified());
+        userfound.setCloudinaryImagePublicId(user.getCloudinaryImagePublicId());
+        userfound.setAbout(user.getAbout());
 
         // userfound.setProvide(user.getProvide());
         userfound.setActive(user.isEnabled());
@@ -53,11 +74,12 @@ public class UserServiceImpl implements UserServices {
     }
 
     @Override
-    public Optional<User> getUser(Integer id) {
+    public User getUserById(String id) {
 
         User userfound = userRepo.findById(id).orElseThrow(() -> new ResourcesNotFoundException("User Not Found"));
 
-        return Optional.ofNullable(userfound);
+        return userfound;
+
     }
 
     @Override
@@ -66,14 +88,15 @@ public class UserServiceImpl implements UserServices {
     }
 
     @Override
-    public void deleteUser(Integer id) {
+    public void deleteUser(String id) {
 
-        userRepo.findById(id).orElseThrow(() -> new ResourcesNotFoundException("User Not Found"));
+        User orElseThrow = userRepo.findById(id).orElseThrow(() -> new ResourcesNotFoundException("User Not Found"));
+        userRepo.delete(orElseThrow);
 
     }
 
     @Override
-    public boolean isUserExists(Integer id) {
+    public boolean isUserExists(String id) {
         User user = userRepo.findById(id).orElse(null);
         return user != null ? true : false;
     }
@@ -87,6 +110,15 @@ public class UserServiceImpl implements UserServices {
     @Override
     public User getUserByEmail(String email) {
 
+        System.out.println("getUserByid____________" + email);
         return userRepo.findByEmail(email).orElse(null);
+    }
+
+    @Override
+    public User getEmailToken(String token) {
+
+        User user = userRepo.findByEmailToken(token).orElse(null);
+
+        return user;
     }
 }

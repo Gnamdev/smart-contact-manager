@@ -1,162 +1,263 @@
-
-
-
 <aside
-        data-th-fragment="sidebar"
-        id="logo-sidebar"
-        class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
-        aria-label="Sidebar"
+  data-th-fragment="sidebar"
+  id="logo-sidebar"
+  class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+  aria-label="Sidebar"
 >
+  <div
+    class="h-full px-3 py-2 overflow-y-auto bg-gray-50 dark:bg-gray-900 pt-10"
+  >
+    <!-- <div class="p-3">
+      <a
+        data-th-href="@{'/user/profile'}"
+        class="flex border-b-orange-500 flex-col items-center p-4 ps-2.5 mb-5"
+      >
+        <img
+          onerror="this.onerror=null;
+        this.src='https://flowbite.com/docs/images/logo.svg'"
+          src="https://flowbite.com/docs/images/logo.svg"
+          data-th-src="@{${loggedInUser.getPicture()}}"
+          class="h-10 me-3 shadow-md md:h-20 rounded-full"
+          alt="Flowbite Logo"
+        /> -->
+    <!-- <p th:text=""></p> -->
+
+    <!-- <span
+          class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
+          >Welcome to SCM</span
+        >
+      </a>
+    </div> -->
+
     <div
-            class="h-full pt-16 px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800"
-            style="margin-top: 76px"
+      class="flex flex-wrap flex-col justify-center items-center cursor-pointer"
     >
-        <a href="https://flowbite.com/" class="flex items-center ps-2.5 mb-5">
-            <img
-                    src="https://flowbite.com/docs/images/logo.svg"
-                    class="h-6 me-3 sm:h-7"
-                    alt="Flowbite Logo"
-            />
-            <span
-                    class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"
-            >Welcome to SCM</span
-            >
-        </a>
-        <ul class="space-y-2 font-medium">
-            <li>
-                <a
-                        data-th-href="@{'/user/dashboard'}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                >
-                    <svg
-                            class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 22 21"
-                    >
-                        <path
-                                d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"
-                        />
-                        <path
-                                d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"
-                        />
-                    </svg>
-                    <span class="ms-3">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a
-                        data-th-href="@{'/user/profile'}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                >
-                    <svg
-                            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 18 18"
-                    >
-                        <path
-                                d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"
-                        />
-                    </svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap"> Profile</span>
-                    <span
-                            class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-green-100 rounded-full dark:bg-gray-700 dark:text-gray-300"
-                    >Manage</span
-                    >
-                </a>
-            </li>
-            <li>
-                <a
-                        data-th-href="@{'/user/contacts/add'}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                >
-                    <i class="fa-solid fa-plus h-5 w-5"></i>
-                    <span class="flex-1 ms-3 whitespace-nowrap">Add Contact</span>
-                    <span
-                            class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"
-                    >3</span
-                    >
-                </a>
-            </li>
-            <li>
-                <a
-                        data-th-href="@{'/user/contacts'}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                >
-                    <i class="fa-regular fa-address-book h-5 w-5"></i>
-                    <span class="flex-1 ms-3 whitespace-nowrap">Contacts</span>
-                </a>
-            </li>
-            <li>
-                <a
-                        href="#"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                >
-                    <svg
-                            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 18 20"
-                    >
-                        <path
-                                d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"
-                        />
-                    </svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap">Products</span>
-                </a>
-            </li>
-            <li>
-                <a
-                        href="#"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                >
-                    <svg
-                            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 18 16"
-                    >
-                        <path
-                                stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"
-                        />
-                    </svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
-                </a>
-            </li>
-            <li>
-                <a
-                        href="#"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                >
-                    <svg
-                            class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                    >
-                        <path
-                                d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z"
-                        />
-                        <path
-                                d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z"
-                        />
-                        <path
-                                d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z"
-                        />
-                    </svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
-                </a>
-            </li>
-        </ul>
+      <div
+        class="bg-gray-300 w-12 h-12 rounded-full flex items-center justify-center font-bold text-black text-xl"
+        style="margin-top: 77px"
+      >
+        <a data-th-href="@{'/user/profile'}">
+          <img
+            onerror="this.onerror=null;
+  this.src='https://flowbite.com/docs/images/logo.svg'"
+            src="https://flowbite.com/docs/images/logo.svg"
+            data-th-src="@{${loggedInUser.getPicture()}}"
+            class="rounded-full"
+            alt="Flowbite Logo"
+        /></a>
+      </div>
+
+      <div class="text-center mt-4">
+        <p
+          class="text-base text-neutral-900"
+          th:text="${loggedInUser.getFirstName()}"
+        >
+          John Doe
+        </p>
+        <p
+          class="text-xs text-neutral-900 dark:text-gray-300 mt-0.5"
+          th:text="${loggedInUser.getEmail()}"
+        >
+          johndoe23@gmail.com
+        </p>
+      </div>
     </div>
+    <hr class="mt-6 border-gray-600" />
+
+    <ul class="space-y-3 mt-8">
+      <!-- Dashboard -->
+      <li>
+        <a
+          href="javascript:void(0)"
+          class="dark:text-gray-300 text-neutral-900 hover:text-white text-sm flex items-center hover:bg-gray-900 rounded px-4 py-3 transition-all"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            class="w-[18px] h-[18px] mr-4"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M197.332 170.668h-160C16.746 170.668 0 153.922 0 133.332v-96C0 16.746 16.746 0 37.332 0h160c20.59 0 37.336 16.746 37.336 37.332v96c0 20.59-16.746 37.336-37.336 37.336zM37.332 32A5.336 5.336 0 0 0 32 37.332v96a5.337 5.337 0 0 0 5.332 5.336h160a5.338 5.338 0 0 0 5.336-5.336v-96A5.337 5.337 0 0 0 197.332 32zm160 480h-160C16.746 512 0 495.254 0 474.668v-224c0-20.59 16.746-37.336 37.332-37.336h160c20.59 0 37.336 16.746 37.336 37.336v224c0 20.586-16.746 37.332-37.336 37.332zm-160-266.668A5.337 5.337 0 0 0 32 250.668v224A5.336 5.336 0 0 0 37.332 480h160a5.337 5.337 0 0 0 5.336-5.332v-224a5.338 5.338 0 0 0-5.336-5.336zM474.668 512h-160c-20.59 0-37.336-16.746-37.336-37.332v-96c0-20.59 16.746-37.336 37.336-37.336h160c20.586 0 37.332 16.746 37.332 37.336v96C512 495.254 495.254 512 474.668 512zm-160-138.668a5.338 5.338 0 0 0-5.336 5.336v96a5.337 5.337 0 0 0 5.336 5.332h160a5.336 5.336 0 0 0 5.332-5.332v-96a5.337 5.337 0 0 0-5.332-5.336zm160-74.664h-160c-20.59 0-37.336-16.746-37.336-37.336v-224C277.332 16.746 294.078 0 314.668 0h160C495.254 0 512 16.746 512 37.332v224c0 20.59-16.746 37.336-37.332 37.336zM314.668 32a5.337 5.337 0 0 0-5.336 5.332v224a5.338 5.338 0 0 0 5.336 5.336h160a5.337 5.337 0 0 0 5.332-5.336v-224A5.336 5.336 0 0 0 474.668 32zm0 0"
+              data-original="#000000"
+            />
+          </svg>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <!-- contacts -->
+      <li>
+        <a
+          th:href="@{'/user/contacts'}"
+          href="javascript:void(0)"
+          class="dark:text-gray-300 text-neutral-900 hover:text-white text-sm flex items-center hover:bg-gray-900 rounded px-4 py-3 transition-all"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            class="w-[18px] h-[18px] mr-4"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M437.02 74.98C388.668 26.63 324.379 0 256 0S123.332 26.629 74.98 74.98C26.63 123.332 0 187.621 0 256s26.629 132.668 74.98 181.02C123.332 485.37 187.621 512 256 512s132.668-26.629 181.02-74.98C485.37 388.668 512 324.379 512 256s-26.629-132.668-74.98-181.02zM111.105 429.297c8.454-72.735 70.989-128.89 144.895-128.89 38.96 0 75.598 15.179 103.156 42.734 23.281 23.285 37.965 53.687 41.742 86.152C361.641 462.172 311.094 482 256 482s-105.637-19.824-144.895-52.703zM256 269.507c-42.871 0-77.754-34.882-77.754-77.753C178.246 148.879 213.13 114 256 114s77.754 34.879 77.754 77.754c0 42.871-34.883 77.754-77.754 77.754zm170.719 134.427a175.9 175.9 0 0 0-46.352-82.004c-18.437-18.438-40.25-32.27-64.039-40.938 28.598-19.394 47.426-52.16 47.426-89.238C363.754 132.34 315.414 84 256 84s-107.754 48.34-107.754 107.754c0 37.098 18.844 69.875 47.465 89.266-21.887 7.976-42.14 20.308-59.566 36.542-25.235 23.5-42.758 53.465-50.883 86.348C50.852 364.242 30 312.512 30 256 30 131.383 131.383 30 256 30s226 101.383 226 226c0 56.523-20.86 108.266-55.281 147.934zm0 0"
+              data-original="#000000"
+            />
+          </svg>
+          <span>Contacts</span>
+        </a>
+      </li>
+      <!-- add contact  -->
+      <li>
+        <a
+          data-th-href="@{'/user/contacts/add'}"
+          href="javascript:void(0)"
+          class="dark:text-gray-300 text-neutral-900 hover:text-white text-sm flex items-center hover:bg-gray-900 rounded px-4 py-3 transition-all"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            class="w-[18px] h-[18px] mr-4"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M18 2c2.206 0 4 1.794 4 4v12c0 2.206-1.794 4-4 4H6c-2.206 0-4-1.794-4-4V6c0-2.206 1.794-4 4-4zm0-2H6a6 6 0 0 0-6 6v12a6 6 0 0 0 6 6h12a6 6 0 0 0 6-6V6a6 6 0 0 0-6-6z"
+              data-original="#000000"
+            />
+            <path
+              d="M12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0v10a1 1 0 0 1-1 1z"
+              data-original="#000000"
+            />
+            <path
+              d="M6 12a1 1 0 0 1 1-1h10a1 1 0 0 1 0 2H7a1 1 0 0 1-1-1z"
+              data-original="#000000"
+            />
+          </svg>
+          <span>Add Contact</span>
+        </a>
+      </li>
+      <!-- <li>
+        <a
+          href="javascript:void(0)"
+          class="text-gray-300 hover:text-white text-sm flex items-center hover:bg-gray-900 rounded px-4 py-3 transition-all"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            class="w-[18px] h-[18px] mr-4"
+            viewBox="0 0 510 510"
+          >
+            <g fill-opacity=".9">
+              <path
+                d="M255 0C114.75 0 0 114.75 0 255s114.75 255 255 255 255-114.75 255-255S395.25 0 255 0zm0 459c-112.2 0-204-91.8-204-204S142.8 51 255 51s204 91.8 204 204-91.8 204-204 204z"
+                data-original="#000000"
+              />
+              <path
+                d="M267.75 127.5H229.5v153l132.6 81.6 20.4-33.15-114.75-68.85z"
+                data-original="#000000"
+              />
+            </g>
+          </svg>
+          <span>Schedules</span>
+        </a>
+      </li> -->
+      <!-- Notification  -->
+      <li>
+        <a
+          href="javascript:void(0)"
+          class="dark:text-gray-300 text-neutral-900 hover:text-white text-sm flex items-center hover:bg-gray-900 rounded px-4 py-3 transition-all"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            class="w-[18px] h-[18px] mr-4"
+            viewBox="0 0 371.263 371.263"
+          >
+            <path
+              d="M305.402 234.794v-70.54c0-52.396-33.533-98.085-79.702-115.151.539-2.695.838-5.449.838-8.204C226.539 18.324 208.215 0 185.64 0s-40.899 18.324-40.899 40.899c0 2.695.299 5.389.778 7.964-15.868 5.629-30.539 14.551-43.054 26.647-23.593 22.755-36.587 53.354-36.587 86.169v73.115c0 2.575-2.096 4.731-4.731 4.731-22.096 0-40.959 16.647-42.995 37.845-1.138 11.797 2.755 23.533 10.719 32.276 7.904 8.683 19.222 13.713 31.018 13.713h72.217c2.994 26.887 25.869 47.905 53.534 47.905s50.54-21.018 53.534-47.905h72.217c11.797 0 23.114-5.03 31.018-13.713 7.904-8.743 11.797-20.479 10.719-32.276-2.036-21.198-20.958-37.845-42.995-37.845a4.704 4.704 0 0 1-4.731-4.731zM185.64 23.952c9.341 0 16.946 7.605 16.946 16.946 0 .778-.12 1.497-.24 2.275-4.072-.599-8.204-1.018-12.336-1.138-7.126-.24-14.132.24-21.078 1.198-.12-.778-.24-1.497-.24-2.275.002-9.401 7.607-17.006 16.948-17.006zm0 323.358c-14.431 0-26.527-10.3-29.342-23.952h58.683c-2.813 13.653-14.909 23.952-29.341 23.952zm143.655-67.665c.479 5.15-1.138 10.12-4.551 13.892-3.533 3.773-8.204 5.868-13.353 5.868H59.89c-5.15 0-9.82-2.096-13.294-5.868-3.473-3.772-5.09-8.743-4.611-13.892.838-9.042 9.282-16.168 19.162-16.168 15.809 0 28.683-12.874 28.683-28.683v-73.115c0-26.228 10.419-50.719 29.282-68.923 18.024-17.425 41.498-26.887 66.528-26.887 1.198 0 2.335 0 3.533.06 50.839 1.796 92.277 45.929 92.277 98.325v70.54c0 15.809 12.874 28.683 28.683 28.683 9.88 0 18.264 7.126 19.162 16.168z"
+              data-original="#000000"
+            ></path>
+          </svg>
+          <span>Notification</span>
+        </a>
+      </li>
+    </ul>
+
+    <hr class="my-8 border-gray-600" />
+
+    <ul class="space-y-3">
+      <li>
+        <a
+          href="javascript:void(0)"
+          class="dark:text-gray-300 text-neutral-900 hover:text-white text-sm flex items-center hover:bg-gray-900 rounded px-4 py-3 transition-all"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            stroke="currentColor"
+            class="w-[18px] h-[18px] mr-4"
+            viewBox="0 0 682.667 682.667"
+          >
+            <defs>
+              <clipPath id="a" clipPathUnits="userSpaceOnUse">
+                <path d="M0 512h512V0H0Z" data-original="#000000"></path>
+              </clipPath>
+            </defs>
+            <g clip-path="url(#a)" transform="matrix(1.33 0 0 -1.33 0 682.667)">
+              <path
+                fill="none"
+                stroke-miterlimit="10"
+                stroke-width="40"
+                d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z"
+                data-original="#000000"
+              ></path>
+              <path
+                d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z"
+                data-original="#000000"
+              ></path>
+            </g>
+          </svg>
+          <span>Inbox</span>
+        </a>
+      </li>
+      <li>
+        <a
+          th:href="@{'/user/profile'}"
+          class="dark:text-gray-300 text-neutral-900 hover:text-white text-sm flex items-center hover:bg-gray-900 rounded px-4 py-3 transition-all"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            class="w-[18px] h-[18px] mr-4"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M437.02 74.98C388.668 26.63 324.379 0 256 0S123.332 26.629 74.98 74.98C26.63 123.332 0 187.621 0 256s26.629 132.668 74.98 181.02C123.332 485.37 187.621 512 256 512s132.668-26.629 181.02-74.98C485.37 388.668 512 324.379 512 256s-26.629-132.668-74.98-181.02zM111.105 429.297c8.454-72.735 70.989-128.89 144.895-128.89 38.96 0 75.598 15.179 103.156 42.734 23.281 23.285 37.965 53.687 41.742 86.152C361.641 462.172 311.094 482 256 482s-105.637-19.824-144.895-52.703zM256 269.507c-42.871 0-77.754-34.882-77.754-77.753C178.246 148.879 213.13 114 256 114s77.754 34.879 77.754 77.754c0 42.871-34.883 77.754-77.754 77.754zm170.719 134.427a175.9 175.9 0 0 0-46.352-82.004c-18.437-18.438-40.25-32.27-64.039-40.938 28.598-19.394 47.426-52.16 47.426-89.238C363.754 132.34 315.414 84 256 84s-107.754 48.34-107.754 107.754c0 37.098 18.844 69.875 47.465 89.266-21.887 7.976-42.14 20.308-59.566 36.542-25.235 23.5-42.758 53.465-50.883 86.348C50.852 364.242 30 312.512 30 256 30 131.383 131.383 30 256 30s226 101.383 226 226c0 56.523-20.86 108.266-55.281 147.934zm0 0"
+              data-original="#000000"
+            />
+          </svg>
+          <span>Profile</span>
+        </a>
+      </li>
+      <li>
+        <a
+          th:href="@{'/logout'}"
+          href="javascript:void(0)"
+          class="dark:text-gray-300 text-neutral-900 hover:text-white text-sm flex items-center hover:bg-gray-900 rounded px-4 py-3 transition-all"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            class="w-[18px] h-[18px] mr-4"
+            viewBox="0 0 6.35 6.35"
+          >
+            <path
+              d="M3.172.53a.265.266 0 0 0-.262.268v2.127a.265.266 0 0 0 .53 0V.798A.265.266 0 0 0 3.172.53zm1.544.532a.265.266 0 0 0-.026 0 .265.266 0 0 0-.147.47c.459.391.749.973.749 1.626 0 1.18-.944 2.131-2.116 2.131A2.12 2.12 0 0 1 1.06 3.16c0-.65.286-1.228.74-1.62a.265.266 0 1 0-.344-.404A2.667 2.667 0 0 0 .53 3.158a2.66 2.66 0 0 0 2.647 2.663 2.657 2.657 0 0 0 2.645-2.663c0-.812-.363-1.542-.936-2.03a.265.266 0 0 0-.17-.066z"
+              data-original="#000000"
+            />
+          </svg>
+          <span>Logout</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 </aside>

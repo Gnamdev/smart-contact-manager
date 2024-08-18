@@ -2,27 +2,36 @@ package com.smartcontactmanager.Controller;
 
 import com.smartcontactmanager.Entity.User;
 import com.smartcontactmanager.Form.*;
+import com.smartcontactmanager.Helper.AppConstants;
 import com.smartcontactmanager.Helper.Message;
 import com.smartcontactmanager.Helper.MessageType;
 import com.smartcontactmanager.repositories.UserRepo;
+import com.smartcontactmanager.services.ImageService;
 import com.smartcontactmanager.services.UserServices;
 
 import jakarta.validation.Valid;
+
+import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MyController {
 
     private final UserServices userServices;
+    private final ImageService imageService;
 
-    public MyController(UserRepo userRepo, UserServices userServices) {
+    public MyController(UserRepo userRepo, UserServices userServices, ImageService imageService) {
 
         this.userServices = userServices;
+        this.imageService = imageService;
     }
 
     @RequestMapping("/home")
@@ -75,45 +84,71 @@ public class MyController {
     // for handling form data
     @PostMapping("/do-register")
     public String processFormData(@Valid @ModelAttribute("user") UserFormData userFormData, BindingResult errors,
-            jakarta.servlet.http.HttpSession session, Model model) {
+            jakarta.servlet.http.HttpSession session, Model model, @RequestParam("userImage") MultipartFile multipart) {
 
-        System.out.println(userFormData);
-
-        // fetch
+        System.out.println("User-controller " + "------>" + userFormData);
 
         // validate
         if (errors.hasErrors()) {
-            // model.addAttribute("user", userFormData);
+
+            Message mgs = Message.builder()
+                    .content("Please provide right information !")
+                    .type(MessageType.red)
+                    .build();
+            session.setAttribute("message", mgs);
 
             return "register";
         }
         // save
 
-        User user = new User();
-        user.setEmail(userFormData.getEmail());
-        user.setPassword(userFormData.getPassword());
-        user.setFirstName(userFormData.getFirstName());
-        user.setLastName(userFormData.getLastName());
-        user.setPassword(userFormData.getPassword());
-        user.setPhoneNumber(userFormData.getPhoneNumber());
+        try {
+            // Create new User object and set its properties
+            User user = new User();
+            user.setEmail(userFormData.getEmail());
+            user.setPassword(userFormData.getPassword());
+            user.setFirstName(userFormData.getFirstName());
+            user.setLastName(userFormData.getLastName());
+            user.setPhoneNumber(userFormData.getPhoneNumber());
+            user.setAbout(userFormData.getAbout());
 
-        user.setProfilePic(
-                "https://in.pinterest.com/pin/default-avatar-profile-icon-of-social-media-user--947022627871095943/");
+            // Handle user image upload
+            String fileURL;
+            String publicId;
+            String filename = UUID.randomUUID().toString();
 
-        // save
-        User userSave = userServices.saveUser(user);
+            if (multipart != null && !multipart.isEmpty()) {
+                fileURL = imageService.uploadImage(multipart, filename);
+                publicId = filename;
+            } else {
+                fileURL = AppConstants.DEFAULT_IMAGE;
+                publicId = filename;
+            }
 
-        // msg success
-        Message registeredSuccessfully = Message.builder()
-                .content("Registered Successfully")
-                .type(MessageType.green)
-                .build();
+            user.setPicture(fileURL);
+            user.setCloudinaryImagePublicId(publicId);
 
-        session.setAttribute("message", registeredSuccessfully);
+            // Save user
+            userServices.saveUser(user);
 
-        // redirect
+            // Display success message
+            Message registeredSuccessfully = Message.builder()
+                    .content("Registered Successfully")
+                    .type(MessageType.green)
+                    .build();
 
-        return "redirect:/register";
+            session.setAttribute("message", registeredSuccessfully);
+
+            // Redirect to login page after successful registration
+            return "redirect:/login";
+        } catch (Exception e) {
+            e.printStackTrace();
+            Message mgs = Message.builder()
+                    .content("An error occurred during registration. Please try again.")
+                    .type(MessageType.red)
+                    .build();
+            session.setAttribute("message", mgs);
+            return "register";
+        }
 
     }
 

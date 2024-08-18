@@ -112,19 +112,18 @@ import java.util.stream.Collectors;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String userId;
 
     @Column(nullable = false)
     private String firstName;
 
     private String lastName;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
-
 
     private String password;
 
@@ -133,25 +132,36 @@ public class User implements UserDetails {
 
     private String role;
 
-    private String profilePic;
+    private String picture;
+    private String cloudinaryImagePublicId;
+    private String about;
 
     private boolean emailVerified = false;
 
     private boolean phoneNumberVerified = false;
 
     private String providerId;
+    private String emailToken;
 
-    @Getter(AccessLevel.NONE)
-    private boolean active = true;
+    private boolean active = false;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> rolesList = new ArrayList<>();
 
+    // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch =
+    // FetchType.LAZY, orphanRemoval = true)
+    // private List<Contact> contacts = new ArrayList<>();
+
+    // add more fields if needed
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Contact> contacts = new ArrayList<Contact>();
+    private List<Contact> contacts = new ArrayList<>();
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roleList = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
         return rolesList.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
@@ -181,4 +191,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return this.active;
     }
+
 }

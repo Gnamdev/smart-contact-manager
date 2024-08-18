@@ -1,59 +1,211 @@
+<header
+  data-th-fragment="navbar"
+  class="bg-white dark:bg-gray-800 py-4 px-4 sm:px-10 z-50 relative"
+>
+  <div class="max-w-7xl w-full mx-auto flex flex-wrap items-center gap-4">
+    <a
+      href="javascript:void(0)"
+      class="flex justify-center items-center space-x-2"
+    >
+      <img th:src="@{'/img/telephone-call.png'}" alt="logo" class="w-10" />
+      <p class="text-blue-800 dark:text-white text-xl font-bold">SCM</p>
+    </a>
+    <!-- menu  -->
+    <div
+      id="collapseMenu"
+      class="max-lg:hidden lg:!block max-lg:fixed max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-40 max-lg:before:inset-0"
+    >
+      <button
+        id="toggleClose"
+        class="lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white dark:bg-neutral-700 p-3"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 fill-black dark:fill-white"
+          viewBox="0 0 320.591 320.591"
+        >
+          <path
+            d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+            data-original="#000000"
+          ></path>
+          <path
+            d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+            data-original="#000000"
+          ></path>
+        </svg>
+      </button>
 
+      <ul
+        class="lg:!flex lg:ml-12 lg:space-x-6 max-lg:space-y-6 max-lg:fixed max-lg:bg-white dark:max-lg:bg-neutrl-800 max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50"
+      >
+        <li class="flex max-lg:border-b max-lg:pb-4 px-3 lg:hidden">
+          <a
+            href="javascript:void(0)"
+            class="flex justify-center items-center space-x-2"
+          >
+            <img
+              th:src="@{'/img/telephone-call.png'}"
+              alt="logo"
+              class="w-10"
+            />
+            <p class="text-blue-800 dark:text-white text-xl font-bold">SCM</p>
+          </a>
+        </li>
+        <li class="max-lg:border-b max-lg:py-2 px-3">
+          <a
+            href="javascript:void(0)"
+            data-th-href="@{'/home'}"
+            class="text-neutral-950 hover:text-blue-500 dark:text-white dark:hover:text-blue-400 block font-semibold transition-all"
+            >Home</a
+          >
+        </li>
+        <li class="max-lg:border-b max-lg:py-2 px-3 group relative">
+          <a
+            href="javascript:void(0)"
+            class="text-neutral-950 dark:bg-gray-800 hover:text-blue-500 dark:text-white dark:hover:text-blue-400 block font-semibold transition-all"
+            >Pages
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-3 fill-current inline ml-1.5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
+                clip-rule="evenodd"
+                data-original="#000000"
+              />
+            </svg>
+          </a>
 
-<nav  th:fragment="navbar" class="bg-white border-gray-600 border-b-0  dark:bg-gray-900   ">
-    <div class="  max-w-screen-xl flex flex-wrap items-center   justify-between mx-auto p-4 ">
-        <a data-th-href="@{/home}" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <ul
+            class="absolute shadow-lg bg-white dark:bg-neutral-800 space-y-3 lg:top-5 max-lg:top-8 -left-0 min-w-[250px] z-50 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-[700px] px-6 group-hover:pb-4 group-hover:pt-6 transition-all duration-500"
+          >
+            <li class="border-b py-2">
+              <a
+                href="javascript:void(0)"
+                data-th-href="@{'/about'}"
+                class="text-blue-600 dark:text-white hover:text-blue-800 dark:hover:text-blue-400 font-semibold block transition-all"
+                >Let's Connect</a
+              >
+            </li>
+            <!-- contact  -->
+            <!-- <li class='border-b py-2 '><a href='javascript:void(0)'
+                          class='text-blue-600 dark:text-white hover:text-blue-800 dark:hover:text-blue-400 font-semibold block transition-all'>Contact</a></li> -->
+            <li class="border-b py-2">
+              <a
+                href="javascript:void(0)"
+                data-th-href="@{'/login'}"
+                class="text-blue-600 dark:text-white hover:text-blue-800 dark:hover:text-blue-400 font-semibold block transition-all"
+                >Login</a
+              >
+            </li>
+            <!-- sign up  -->
+            <li class="border-b py-2">
+              <a
+                href="javascript:void(0)"
+                data-th-href="@{'/register'}"
+                class="text-blue-600 dark:text-white hover:text-blue-800 dark:hover:text-blue-400 font-semibold block transition-all"
+                >Sign up</a
+              >
+            </li>
+            <!-- <li class='border-b py-2 '><a href='javascript:void(0)'
+                          class='text-blue-600 dark:text-white hover:text-blue-800 dark:hover:text-blue-400 font-semibold block transition-all'>Blog</a></li> -->
+          </ul>
+        </li>
+        <li class="max-lg:border-b max-lg:py-2 px-3 group relative">
+          <a
+            href="javascript:void(0)"
+            class="text-neutral-950 dark:bg-gray-800 hover:text-blue-500 dark:text-white dark:hover:text-blue-400 block font-semibold transition-all"
+            >Feature
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-3 fill-current inline ml-1.5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
+                clip-rule="evenodd"
+                data-original="#000000"
+              />
+            </svg>
+          </a>
 
-            <img data-th-src = "@{img/telephone-call.png}" class="h-8 " alt="LoGo" />
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">SCM</span>
-        </a>
-
-        <div class="flex gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-
-
-            <a data-th-href="@{/login}"  type="button"
-                    class="text-white bg-gray-700 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</a>
-            <a data-th-href="@{/register}" type="button"
-                    class="text-white bg-gray-700 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">SignUp</a>
-
-            <img  data-th-src="@{'/img/lamp.png'}" type="button" id="theme_change" class=" w-10 gap-2 px-1.5 bg-gray-500 text-white rounded-3xl p-1.5 dark:border-blue-800 dark:bg-white-800   ">
-<!--                <i class="fa-solid fa-circle-half-stroke "></i><span class=" text-xl">Light</span></i>-->
-            </img>
-<!--            <img type="button" id="theme_change_2" class="px-1.5  bg-gray-500 text-white rounded-3xl p-1.5 dark:border-blue-800 dark:bg-gray-800  "-->
-
-
-
-
-
-
-
-
-
-
-            <!--            <button type="button" class="text-white bg-gray-500 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">signUp</button>-->
-
-            <button data-collapse-toggle="navbar-cta" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">
-                <span class="sr-only">Open main menu</span>
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                    <path stroke="currentCol
-            </button>or" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-                </svg>
-        </div>
-        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
-            <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                <li>
-                    <a data-th-href="@{/home}" class="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500" aria-current="page">Home</a>
-                </li>
-                <li>
-                    <a data-th-href="@{/about}" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-                </li>
-                <li>
-                    <a data-th-href="@{/service}" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-                </li>
-                <li>
-                    <a data-th-href="@{/contact}" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-                </li>
-            </ul>
-        </div>
+          <ul
+            class="absolute shadow-lg bg-white dark:bg-neutral-800 space-y-3 lg:top-5 max-lg:top-8 -left-0 min-w-[250px] z-50 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-[700px] px-6 group-hover:pb-4 group-hover:pt-6 transition-all duration-500"
+          >
+            <li class="border-b py-2">
+              <a
+                href="javascript:void(0)"
+                class="text-blue-600 dark:text-white hover:text-blue-800 dark:hover:text-blue-400 font-semibold block transition-all"
+                >Secure User Login</a
+              >
+            </li>
+            <li class="border-b py-2">
+              <a
+                href="javascript:void(0)"
+                data-th-href="@{'/contact'}"
+                class="text-blue-600 dark:text-white hover:text-blue-800 dark:hover:text-blue-400 font-semibold block transition-all"
+                >Contact Export to Excel</a
+              >
+            </li>
+            <li class="border-b py-2">
+              <a
+                href="javascript:void(0)"
+                class="text-blue-600 dark:text-white hover:text-blue-800 dark:hover:text-blue-400 font-semibold block transition-all"
+                >Dark Mode Support</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
-</nav>
+
+    <div class="flex ml-auto">
+      <div class="flex gap-4">
+        <a data-th-href="@{'/register'}">
+          <button
+            class="bg-blue-100 dark:bg-gray-600 hover:bg-blue-200 dark:hover:bg-blue-500 flex items-center transition-all font-semibold rounded-md px-5 py-3 text-blue-800 dark:text-white"
+          >
+            Get started
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-[14px] fill-current ml-2"
+              viewBox="0 0 492.004 492.004"
+            >
+              <path
+                d="M484.14 226.886 306.46 49.202c-5.072-5.072-11.832-7.856-19.04-7.856-7.216 0-13.972 2.788-19.044 7.856l-16.132 16.136c-5.068 5.064-7.86 11.828-7.86 19.04 0 7.208 2.792 14.2 7.86 19.264L355.9 207.526H26.58C11.732 207.526 0 219.15 0 234.002v22.812c0 14.852 11.732 27.648 26.58 27.648h330.496L252.248 388.926c-5.068 5.072-7.86 11.652-7.86 18.864 0 7.204 2.792 13.88 7.86 18.948l16.132 16.084c5.072 5.072 11.828 7.836 19.044 7.836 7.208 0 13.968-2.8 19.04-7.872l177.68-177.68c5.084-5.088 7.88-11.88 7.86-19.1.016-7.244-2.776-14.04-7.864-19.12z"
+                data-original="#000000"
+              />
+            </svg>
+          </button>
+        </a>
+        <img
+          data-th-src="@{'/img/lamp.png'}"
+          type="button"
+          id="theme_change"
+          class="w-10 h-10 rounded-full bg-gray-500 dark:bg-gray-700 text-white dark:text-gray-300 shadow-md dark:shadow-lg transition-transform transform hover:scale-110 active:scale-95"
+          style="border-radius: 50%; /* Makes the button circular */"
+        />
+        <div>
+          <button id="toggleOpen" class="lg:hidden ml-7">
+            <svg
+              class="w-7 h-7"
+              fill="#000"
+              dark:fill="#fff"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,55 +1,44 @@
-
 console.log("script loaded");
 
 let currentTheme = getData();
-
 console.log(currentTheme);
 
 changeTheme(currentTheme);
 
 function changeTheme(theme) {
-    // Remove existing theme classes (if any)
-    document.querySelector('html').classList.remove('light', 'dark');
+    const htmlElement = document.querySelector('html');
+    const themeChangeButton = document.querySelector("#theme_change");
 
-    // Apply the current theme to the web page
-    document.querySelector('html').classList.add(theme);
+    htmlElement.classList.remove('light', 'dark');
+    htmlElement.classList.add(theme);
 
-    // Update the theme change button image
-    let changeThemButtonListener = document.querySelector("#theme_change");
-    changeThemButtonListener.src = theme === 'light' ? '/img/lamp.png' : '/img/moon.png';
+    themeChangeButton.src = theme === 'light' ? '/img/lamp.png' : '/img/dark-mode.png';
 
-    // Set the event listener for the theme change button
-    changeThemButtonListener.addEventListener('click', (event) => {
-        console.log("button click");
-        console.log(event.type);
-
-        // Remove the current theme
-        document.querySelector('html').classList.remove(theme);
-
-        // Toggle the theme
-        theme = theme === "dark" ? "light" : "dark";
-
-        // Apply the new theme
-        document.querySelector('html').classList.add(theme);
-
-        // Update the button image
-        changeThemButtonListener.src = theme === 'light' ? '/img/lamp.png' : '/img/moon.png';
-
-        // Update the local storage
-        setData(theme);
-    });
+    themeChangeButton.removeEventListener('click', handleThemeChange);
+    themeChangeButton.addEventListener('click', handleThemeChange);
 }
 
-// Set data to local storage
+function handleThemeChange() {
+    const htmlElement = document.querySelector('html');
+    const themeChangeButton = document.querySelector("#theme_change");
+
+    let currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+    let newTheme = currentTheme === "dark" ? "light" : "dark";
+
+    htmlElement.classList.remove(currentTheme);
+    htmlElement.classList.add(newTheme);
+
+    themeChangeButton.src = newTheme === 'light' ? '/img/lamp.png' : '/img/dark-mode.png';
+    setData(newTheme);
+}
+
 function setData(theme) {
     localStorage.setItem("theme", theme);
 }
 
-// Fetch data from local storage
 function getData() {
     let data = localStorage.getItem("theme");
     return data ? data : "light";
 }
 
-// Ensure the theme change button has the correct image initially
-document.querySelector("#theme_change").src = currentTheme === 'light' ? '/img/lamp.png' : '/img/moon.png';
+document.querySelector("#theme_change").src = currentTheme === 'light' ? '/img/lamp.png' : '/img/dark-mode.png';

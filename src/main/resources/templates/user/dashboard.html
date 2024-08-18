@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html
-        lang="en"
-        th:replace="~{base :: parent(~{::#content},~{::title})}"
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
 >
-<head>
-    <title data-th-text="${loggedInUser.getFirstName()}+' |  SCM'">Dashbord Page</title>
-</head>
-<body>
-<div id="content">
-    <!-- sidebar -->
+  <head>
+    <title data-th-text="${loggedInUser.getFirstName()}+' |  SCM'">
+      Dashbord Page
+    </title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="content">
+      <!-- sidebar -->
 
-    <!-- user is logged in : sidebar -->
+      <!-- user is logged in : sidebar -->
 
-    <div th:if="${loggedInUser}">
+      <div th:if="${loggedInUser}">
         <div data-th-replace="~{user/sidebar :: sidebar}"></div>
-    </div>
+      </div>
 
-    <div class="sm:pl-64  pt-20" style="height: 1000px ">
+      <div class="sm:pl-64 pt-20" style="height: 1000px">
         <div class="flex justify-center flex-col items-center">
-            <h1 class="text-5xl">Welcome to Dashbord page</h1>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Consequatur, ratione!
-            </p>
+          <h1 class="text-5xl">Welcome to Dashbord page</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Consequatur, ratione!
+          </p>
+          <!-- <div data-th-replace="~{ user/contact_modals :: contact}"></div> -->
         </div>
+      </div>
     </div>
-</div>
 
-<script>
-    console.log("this is profile page");
-</script>
-</body>
+    <script>
+      console.log("this is profile page");
+    </script>
+  </body>
 </html>

@@ -3,19 +3,25 @@
   class="light"
   lang="en"
   xmlns:th="http://www.thymeleaf.org"
-  th:fragment="parent(content , title)"
+  th:fragment="parent(content , title ,script)"
 >
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title th:replace="${title}">Base page</title>
-      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-      <link
-              href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
-              rel="stylesheet"
-      />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" data-th-href="@{'./CSS/output.css'}" />
-    <link rel="stylesheet" data-th-href="@{'./CSS/style.css'}">
+    <link rel="stylesheet" data-th-href="@{'./CSS/style.css'}" />
+
     <link
       rel="stylesheet"
       data-th-href="@{ https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css}"
@@ -23,27 +29,47 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: Poppins, sans-serif;
+      }
+    </style>
   </head>
-  <body class="dark:bg-gray-900 dark:text-white bg-gray-100">
-<!--      header part start-->
+  <body class="dark:bg-gray-800 dark:text-white bg-gray-100">
+    <!--      header part start-->
 
-<!--      user is logged in : navbar-->
+    <!--      user is logged in : navbar-->
     <div th:if="${loggedInUser}">
-        <div data-th-replace="~{user/userNavbar::user-navbar}"></div>
-
+      <div data-th-replace="~{user/userNavbar::user-navbar}"></div>
     </div>
 
     <!-- user is not logged : navbar -->
-    <div th:unless="${loggedInUser}">
-        <div th:replace="~{Navber :: navbar}"></div>
-
+    <div class="dark:bg-neutral-900 text-white" th:unless="${loggedInUser}">
+      <div th:replace="~{Navber :: navbar}"></div>
     </div>
 
-<!--    <div th:replace="~{Navber :: navbar}"></div>-->
+    <!--    <div th:replace="~{Navber :: navbar}"></div>-->
 
     <!--start of main contain-->
     <section th:replace="${content } ">
-      <div class="bg-amber-700 p-2  font-bold text-white">
+      <div class="bg-amber-700 p-2 font-bold dark:bg-neutral-900 text-white">
         <h1>Hello inside base</h1>
       </div>
     </section>
@@ -53,7 +79,50 @@
     <!--end of footer part-->
 
     <script data-th-src="@{'/js/script.js'}"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@themesberg/flowbite@1.4.7/dist/flowbite.bundle.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/@themesberg/flowbite@1.4.7/dist/flowbite.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <th:block data-th-replace="${script}"></th:block>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const button = document.querySelector(
+          '[data-collapse-toggle="navbar-cta"]'
+        );
+        const menu = document.getElementById("navbar-cta");
+        button.addEventListener("click", function () {
+          if (menu.classList.contains("hidden")) {
+            menu.classList.remove("hidden");
+            button.setAttribute("aria-expanded", "true");
+          } else {
+            menu.classList.add("hidden");
+            button.setAttribute("aria-expanded", "false");
+          }
+        });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const toggleButton = document.querySelector(
+          '[data-drawer-toggle="logo-sidebar"]'
+        );
+        const sidebar = document.getElementById("logo-sidebar");
+
+        if (toggleButton && sidebar) {
+          toggleButton.addEventListener("click", () => {
+            // Toggle the sidebar's visibility
+            sidebar.classList.toggle("-translate-x-full");
+            sidebar.classList.toggle("translate-x-0");
+          });
+        } else {
+          console.error("Toggle button or sidebar not found.");
+        }
+      });
+    </script>
   </body>
 </html>

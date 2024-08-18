@@ -1,4 +1,4 @@
-package com.smartcontactmanager.Entity;
+package smartcontactmanager.Entity;
 
 import static org.junit.jupiter.api.Assertions.*;
 

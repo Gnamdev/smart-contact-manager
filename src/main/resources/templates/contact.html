@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{Base :: parent(~{:: #content} , ~{::title})}">
-<head>
-    <title>
-        contact page
-    </title>
-</head>
-<body>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{Base :: parent(~{:: #content} , ~{::title},~{::script})}"
+>
+  <head>
+    <title>contact page</title>
+  </head>
+  <body>
+    <section id="content">
+      <h1 class="text-3xl pt-16">im in contact page</h1>
+    </section>
 
-<section id="content">
-    <h1 class="text-3xl pt-16"> im in contact page </h1>
-</section>
-
-</body>
+    <script></script>
+  </body>
 </html>

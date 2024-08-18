@@ -14,13 +14,13 @@ import java.util.List;
 @NoArgsConstructor
 public class Contact {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -33,13 +33,19 @@ public class Contact {
     private String websiteLink;
     private String linkedInLink;
     private String picture;
-    // private List<String> socialLinks=new ArrayList<>();
+
     private String cloudinaryImagePublicId;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private String userId;
+
+    @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<SocialLinks> socialLinks = new ArrayList<>();
+    // @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch =
+    // FetchType.EAGER, orphanRemoval = true)
+
+    @OneToMany(mappedBy = "contact", fetch = FetchType.EAGER, orphanRemoval = true)
+
+    private List<SocialLinks> links = new ArrayList<>();
 
 }

@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @AllArgsConstructor
@@ -25,19 +26,16 @@ public class UserFormData {
 
     @Email(message = "Please provide a valid email address")
     @NotEmpty(message = "Email is required")
-
     @Column(unique = true)
     private String email;
 
-    @Size(min = 3, message = "Password should be at least 5 characters long")
-    // @Pattern(regexp =
-    // "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{5,}$", message
-    // = "Password must contain at least one digit, one lowercase letter, one
-    // uppercase letter, one special character, and no whitespace")
-    private String password;
-
-    @Size(min = 8, max = 12, message = "Phone number should be between 8 and 12 characters")
+    @NotBlank(message = "Phone number is mandatory")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits")
     private String phoneNumber;
 
-    // private String about;
+    @Size(min = 8, max = 12, message = "Password should be between 8 and 12 characters")
+    private String password;
+    private String about;
+
+    private MultipartFile userImage;
 }

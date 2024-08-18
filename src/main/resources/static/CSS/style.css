@@ -46,3 +46,58 @@
     border-bottom-right-radius: 1.5rem/* 24px */;
     border-bottom-left-radius: 1.5rem/* 24px */;
 }
+
+
+
+
+/* sweet alert css */
+
+/* Customize the confirm button */
+.custom-confirm-button {
+    background-color: #ff0000; /* Red color */
+    color: white; /* Text color */
+    border: none;
+  }
+  
+  /* Customize the cancel button */
+  .custom-cancel-button {
+    background-color: #6c757d; /* Gray color */
+    color: white; /* Text color */
+    border: none;
+  }
+  
+  /* Add hover effect for better visibility */
+  .custom-confirm-button:hover {
+    background-color: #cc0000; /* Darker red */
+  }
+  
+  .custom-cancel-button:hover {
+    background-color: #5a6268; /* Darker gray */
+  }
+  
+
+
+  /* profile image bck  */
+
+  .bgi{
+    background-image: url();
+  }
+
+  /* Tailwind CSS classes for visibility */
+.sidebar-hidden {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-visible {
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+
+/* styles.css */
+#homePage.dark {
+  /* Your dark mode styles specific to the home page */
+  background-color: #121212;
+  color: #ffffff;
+}

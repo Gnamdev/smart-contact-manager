@@ -15,11 +15,11 @@ public class SocialLinks {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id ;
+    private int id;
 
     private String link;
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    @ManyToOne
     private Contact contact;
 }

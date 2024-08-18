@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+>
+  <head>
+    <title>view Page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="content">
+      <!-- sidebar -->
+
+      <!-- user is logged in : sidebar -->
+
+      <div th:if="${loggedInUser}">
+        <div data-th-replace="~{user/sidebar :: sidebar}"></div>
+      </div>
+
+      <div class="sm:pl-64 pt-20" style="height: 1000px">
+        <div class="grid grid-cols-12">
+          <div class="col-span-3"></div>
+          <div class="col-span-12 md:col-span-6 pt-10">
+            <div
+              class="card block p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              <a data-th-href="@{'/user/contacts'}">
+                <i
+                  class="fa-regular dark:text-gray-300 fa-circle-xmark text-3xl text-gray-500 transform hover:rotate-90 hover:scale-110 transition duration-200 ease-in-out"
+                ></i>
+              </a>
+
+              <div class="flex flex-col items-center">
+                <div
+                  class="p-5 flex flex-col justify-center items-center space-y-2"
+                >
+                  <img
+                    onerror="this.src='https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png'"
+                    id="contact_image"
+                    class="w-32 h-32 rounded-full"
+                    data-th-src="@{${veiwData.picture}}"
+                    alt=""
+                  />
+                  <h3
+                    id="contact_name"
+                    data-th-text="${veiwData.name}"
+                    class="text-xl font-mono text-gray-600 dark:text-white"
+                  ></h3>
+
+                  <h3
+                    id="contact_name"
+                    data-th-text="${veiwData.email}"
+                    class="text-sm text-gray-900 dark:text-white"
+                  ></h3>
+                </div>
+              </div>
+              <!-- Modal body -->
+              <div class="p-4 md:p-5 space-y-4">
+                <!--  other contact information  -->
+
+                <div class="relative overflow-x-auto">
+                  <table
+                    class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400"
+                  >
+                    <tbody>
+                      <!-- contact  -->
+
+                      <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                      >
+                        <th
+                          scope="row"
+                          class="px-6 py-4 font-mono text-xl text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                          <i class="fa-solid fa-user w-6 h-6"></i>
+                        </th>
+                        <td class="px-6 py-4">
+                          <span
+                            data-th-text="${veiwData.phoneNumber}"
+                            id="contact_about"
+                          ></span>
+                        </td>
+                      </tr>
+
+                      <!-- location  -->
+                      <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                      >
+                        <th
+                          scope="row"
+                          class="px-6 py-4 font-mono text-xl text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                          <i class="fa-solid fa-location-dot w-6 h-6"></i>
+                        </th>
+                        <td class="px-6 py-4">
+                          <span
+                            id="contact_address"
+                            data-th-text="${veiwData.address}"
+                            >Indore , khajrana Ganesh Mandire</span
+                          >
+                        </td>
+                      </tr>
+
+                      <!-- linkdin  -->
+                      <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                      >
+                        <th
+                          scope="row"
+                          class="px-6 py-4 font-mono text-xl text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                          <i class="fa-brands fa-linkedin-in w-6 h-6"></i>
+                        </th>
+
+                        <td class="px-6 py-4">
+                          <a
+                            id="contact_linkedIn"
+                            data-th-text="${veiwData.linkedInLink}"
+                          ></a>
+                        </td>
+                      </tr>
+
+                      <!-- website  -->
+                      <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                      >
+                        <th
+                          scope="row"
+                          class="px-6 py-4 font-mono text-xl text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                          <i class="fa-solid fa-earth-americas w-6 h-6"></i>
+                        </th>
+
+                        <td class="px-6 py-4">
+                          <a
+                            id="contact_linkedIn"
+                            data-th-text="${veiwData.websiteLink}"
+                          ></a>
+                        </td>
+                      </tr>
+                      <!-- favorite  -->
+                      <tr
+                        data-th-if="${veiwData.favorite}"
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                      >
+                        <th
+                          scope="row"
+                          class="px-6 py-4 font-mono text-xl text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                          <i class="fa-regular fa-heart w-6 h-6"></i>
+                        </th>
+                        <td class="px-6 py-4">
+                          <span
+                            id="contact_favorite"
+                            class="font-mono text-md text-blue-600 dark:text-green-500"
+                            >This is your favorite contact</span
+                          >
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      console.log("this is view page");
+    </script>
+  </body>
+</html>

@@ -14,12 +14,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     @Autowired
-   private SucrityServiceImpl sucrityService;
+    private SucrityServiceImpl sucrityService;
 
     @Autowired
-  private   AuthenticationHandler authenticationHandler;
+    private AuthenticationHandler authenticationHandler;
 
-
+    @Autowired
+    private AuthFailtureHandler authFailtureHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -39,14 +40,16 @@ public class SecurityConfiguration {
         // related
         httpSecurity.formLogin(formLogin -> {
             formLogin.loginPage("/login")
-            .loginProcessingUrl("/authentication")
+                    .loginProcessingUrl("/authentication")
                     .usernameParameter("email")
                     .passwordParameter("password")
                     .successForwardUrl("/user/dashboard")
                     .failureForwardUrl("/login?error=true");
+
+            formLogin.failureHandler(authFailtureHandler);
         });
 
-        httpSecurity.logout(httpSecurityLogoutConfigurer ->{
+        httpSecurity.logout(httpSecurityLogoutConfigurer -> {
             httpSecurityLogoutConfigurer
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/login?logout=true");
@@ -64,7 +67,6 @@ public class SecurityConfiguration {
 
     }
 
-
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
@@ -75,6 +77,7 @@ public class SecurityConfiguration {
 
         return daoAuthenticationProvider;
     }
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
