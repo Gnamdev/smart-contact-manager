@@ -16,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.smartcontactmanager.Entity.User;
 import com.smartcontactmanager.Form.UserProfileUpdate;
+import com.smartcontactmanager.Helper.Message;
 import com.smartcontactmanager.Helper.MessageType;
+import com.smartcontactmanager.services.EmailService;
 import com.smartcontactmanager.services.ImageService;
 import com.smartcontactmanager.services.UserServices;
 
@@ -34,6 +36,9 @@ public class UserController {
 
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    private EmailService emailService;
 
     @RequestMapping("/dashboard")
     public String userDeshbord() {
@@ -122,6 +127,34 @@ public class UserController {
 
     @GetMapping("/feedback")
     public String feedBackForm() {
+        return "user/feed_back";
+    }
+
+    @PostMapping("/feedback")
+    public String handlerFeedBackForm(@RequestParam("email") String email,
+            @RequestParam("subject") String subject,
+            @RequestParam("message") String about,
+            HttpSession httpSession) {
+
+        boolean sendEmailToMEForFeedBackForm = emailService.sendEmailToMEForFeedBackForm(email, subject, about);
+
+        if (sendEmailToMEForFeedBackForm) {
+            Message message = Message.builder()
+                    .content(
+                            " Thank you for taking the time to provide your feedback. Your insights are greatly appreciated and will help us improve our services. ")
+                    .type(MessageType.green)
+                    .build();
+
+            httpSession.setAttribute("message", message);
+        } else {
+            Message message = Message.builder()
+                    .content("Oops , Somthing went Wrong ! ")
+                    .type(MessageType.red)
+                    .build();
+
+            httpSession.setAttribute("message", message);
+        }
+
         return "user/feed_back";
     }
 

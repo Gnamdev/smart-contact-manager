@@ -31,7 +31,8 @@ public class ForgetPasswordServiceImpl implements ForgotPasswordService {
             String otp = generateVerificationCode();
             System.out.println("otp is ----------> " + otp);
             session.setAttribute("otp", otp);
-            session.setAttribute("otpGeneratedTime", System.currentTimeMillis());
+            // session.setAttribute("otpGeneratedTime", System.currentTimeMillis());
+            session.setAttribute("email", email); // Store email in session
             emailService.sendMail(email, "OTP for forget password request : ", otp);
 
         } else {
@@ -60,9 +61,22 @@ public class ForgetPasswordServiceImpl implements ForgotPasswordService {
     }
 
     @Override
-    public boolean resetePassword(String email, String newPass, String confirmPass) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'resetePassword'");
+    public boolean resetePassword(HttpSession session) {
+
+        String email = (String) session.getAttribute("email");
+
+        if (email != null) {
+            String otp = generateVerificationCode();
+            System.out.println(" resend otp is ----------> " + otp);
+            session.setAttribute("otp", otp);
+
+            emailService.sendMail(email, "OTP for resend passwor is : ", otp);
+
+        } else {
+            return false;
+        }
+
+        return true;
     }
 
     private String generateVerificationCode() {

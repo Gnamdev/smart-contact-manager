@@ -39,8 +39,7 @@
         <a data-th-href="@{'/user/profile'}">
           <img
             onerror="this.onerror=null;
-  this.src='https://flowbite.com/docs/images/logo.svg'"
-            src="https://flowbite.com/docs/images/logo.svg"
+  this.src='https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?w=740&t=st=1723989801~exp=1723990401~hmac=5d1c26f56f33ad0e2eb550af579124ab65678f749489c18623ffb683ad6fc5b0'"
             data-th-src="@{${loggedInUser.getPicture()}}"
             class="rounded-full"
             alt="Flowbite Logo"
@@ -187,7 +186,7 @@
     <ul class="space-y-3">
       <li>
         <a
-          href="javascript:void(0)"
+          th:href="@{'/user/feedback'}"
           class="dark:text-gray-300 text-neutral-900 hover:text-white text-sm flex items-center hover:bg-gray-900 rounded px-4 py-3 transition-all"
         >
           <svg
@@ -216,7 +215,7 @@
               ></path>
             </g>
           </svg>
-          <span>Inbox</span>
+          <span>Feedback</span>
         </a>
       </li>
       <li>

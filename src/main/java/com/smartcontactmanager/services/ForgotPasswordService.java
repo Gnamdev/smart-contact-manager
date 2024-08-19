@@ -12,6 +12,6 @@ public interface ForgotPasswordService {
 
     // resete pass
 
-    boolean resetePassword(String email, String newPass, String confirmPass);
+    boolean resetePassword(HttpSession session);
 
 }

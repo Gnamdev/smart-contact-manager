@@ -133,36 +133,30 @@ public class ForgotPasswordController {
     }
 
     // resend
-    @GetMapping("/resendOtp")
+    @PostMapping("/resendOtp")
     public String resendOtpHandler(HttpSession session) {
 
         System.out.println("resend opt -------> ");
-        Long otpGeneratedTime = (Long) session.getAttribute("otpGeneratedTime");
 
-        if (otpGeneratedTime != null && System.currentTimeMillis() - otpGeneratedTime < RESEND_DELAY_MS) {
+        boolean otpSend = forgotPasswordService.resetePassword(session);
+
+        if (otpSend) {
             Message message = Message.builder()
-                    .content("You can only request a new OTP every 30 seconds.")
-                    .type(MessageType.blue)
+                    .content(" Resend OTP Send In your email ")
+                    .type(MessageType.green)
                     .build();
 
             session.setAttribute("message", message);
-            return "";
+
+        } else {
+            Message message = Message.builder()
+                    .content("Fail to SEND OTP IN YOUR EMAIL ")
+                    .type(MessageType.red)
+                    .build();
+
+            session.setAttribute("message", message);
+
         }
-
-        // Generate a new OTP
-        String otp = String.format("%04d", new Random().nextInt(9999));
-
-        // Store the new OTP and update the timestamp in the session
-        session.setAttribute("otp", otp);
-        session.setAttribute("otpGeneratedTime", System.currentTimeMillis());
-
-        forgotPasswordService.otpSend(otp, session);
-        Message message = Message.builder()
-                .content("OTP SEND IN YOUR EMAIL ")
-                .type(MessageType.green)
-                .build();
-
-        session.setAttribute("message", message);
 
         return "verify_otp";
     }
