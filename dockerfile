@@ -1,6 +1,11 @@
+FROM maven:3.8.5-openjdk-17 AS build
+COPY . .
+RUN mvn clean package -DskipTests
+COPY .env ./
 FROM openjdk:17.0.1-jdk-slim
 COPY --from=build /target/smart-contact-manager-0.0.1-SNAPSHOT.jar smart-contact-manager.jar
 EXPOSE 8090
+
 ENV DB_URL=jdbc:mysql://localhost:3306/scm_db
 ENV DB_USERNAME=root
 ENV DB_PASSWORD=gotunamdev
@@ -13,4 +18,5 @@ ENV CLOUDINARY_API_KEY=752257441416641
 ENV CLOUDINARY_API_SECRET=y_nGBqybpm-UmyCI_wuC5f8dFG8
 ENV MAIL_USERNAME=testing.goutam@gmail.com
 ENV MAIL_PASSWORD=wdmpbsxtnwplumql
+# ENTRYPOINT ["java","-jar","smart-contact-manager.jar"]
 ENTRYPOINT ["java","-jar","smart-contact-manager.jar"]
