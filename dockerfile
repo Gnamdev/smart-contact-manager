@@ -3,8 +3,8 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 FROM openjdk:17.0.1-jdk-slim
-COPY --from=build /target/smart-contact-manager-0.0.1-SNAPSHOT.jar smart-contact-manager.jar
-
+# COPY --from=build /target/smart-contact-manager-0.0.1-SNAPSHOT.jar smart-contact-manager.jar
+COPY --from=build /app/target/smart-contact-manager.jar smart-contact-manager.jar
 COPY .env ./
 EXPOSE 8090
 
