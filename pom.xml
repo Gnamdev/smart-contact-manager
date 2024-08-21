@@ -17,6 +17,7 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -130,6 +131,12 @@
     <version>1.7</version>
 </dependency>
 	
+
+		<!-- <dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency> -->
 	</dependencies>
 
 	<build>
@@ -150,10 +157,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>20</source> <!-- Correct Java version -->
-					<target>20</target>
+					<source>17</source> <!-- Correct Java version -->
+					<target>17</target>
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>smart-contact-manager</finalName>
 	</build>
 </project>
