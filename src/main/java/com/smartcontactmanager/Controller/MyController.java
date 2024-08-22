@@ -66,7 +66,7 @@ public class MyController {
     @GetMapping("/login")
     public String loginPage() {
 
-        // System.out.println("login page");
+        System.out.println("login page");
         return "login";
     }
 
