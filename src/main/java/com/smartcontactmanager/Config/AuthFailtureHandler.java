@@ -12,12 +12,10 @@ import com.smartcontactmanager.Helper.Message;
 import com.smartcontactmanager.Helper.MessageType;
 import com.smartcontactmanager.services.EmailService;
 
-import jakarta.persistence.Access;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.constraints.Email;
 
 @Component
 public class AuthFailtureHandler implements AuthenticationFailureHandler {

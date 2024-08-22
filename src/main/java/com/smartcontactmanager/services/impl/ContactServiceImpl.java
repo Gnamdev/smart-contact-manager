@@ -35,6 +35,7 @@ public class ContactServiceImpl implements ContactService {
 
         var contactOld = contactRepo.findById(contact.getId())
                 .orElseThrow(() -> new ResourcesNotFoundException("Contact not found"));
+
         contactOld.setName(contact.getName());
         contactOld.setEmail(contact.getEmail());
         contactOld.setPhoneNumber(contact.getPhoneNumber());
@@ -45,10 +46,10 @@ public class ContactServiceImpl implements ContactService {
         contactOld.setPicture(contact.getPicture());
 
         contactOld.setFavorite(contact.isFavorite());
-        contactOld.setWebsiteLink(contact.getWebsiteLink());
+        // contactOld.setWebsiteLink(contact.getWebsiteLink());
         contactOld.setLinkedInLink(contact.getLinkedInLink());
         contactOld.setCloudinaryImagePublicId(contact.getCloudinaryImagePublicId());
-        contactOld.setLinks(contact.getLinks());
+        // contactOld.setLinks(contact.getLinks());
 
         return contactRepo.save(contactOld);
     }

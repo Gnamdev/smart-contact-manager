@@ -1,6 +1,6 @@
 <header
   data-th-fragment="navbar"
-  class="bg-white dark:bg-gray-800 py-4 px-4 sm:px-10 z-50 relative"
+  class="bg-white dark:bg-gray-800 py-4 px-4 sm:px-10 z-[300] fixed w-full"
 >
   <div class="max-w-7xl w-full mx-auto flex flex-wrap items-center gap-4">
     <a
@@ -36,7 +36,7 @@
       </button>
 
       <ul
-        class="lg:!flex lg:ml-12 lg:space-x-6 max-lg:space-y-6 max-lg:fixed max-lg:bg-white dark:max-lg:bg-neutrl-800 max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50"
+        class="lg:!flex lg:ml-12 z-[90] lg:space-x-6 max-lg:space-y-6 max-lg:fixed dark:max-lg:bg-gray-800 max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto"
       >
         <li class="flex max-lg:border-b max-lg:pb-4 px-3 lg:hidden">
           <a
@@ -54,7 +54,6 @@
         <li class="max-lg:border-b max-lg:py-2 px-3">
           <a
             href="javascript:void(0)"
-            data-th-href="@{'/home'}"
             class="text-neutral-950 hover:text-blue-500 dark:text-white dark:hover:text-blue-400 block font-semibold transition-all"
             >Home</a
           >
@@ -62,7 +61,7 @@
         <li class="max-lg:border-b max-lg:py-2 px-3 group relative">
           <a
             href="javascript:void(0)"
-            class="text-neutral-950 dark:bg-gray-800 hover:text-blue-500 dark:text-white dark:hover:text-blue-400 block font-semibold transition-all"
+            class="text-neutral-950 dark:bg-gray-800 hover:text-blue-600 dark:text-white dark:hover:text-blue-400 block font-semibold transition-all"
             >Pages
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -79,16 +78,8 @@
           </a>
 
           <ul
-            class="absolute shadow-lg bg-white dark:bg-neutral-800 space-y-3 lg:top-5 max-lg:top-8 -left-0 min-w-[250px] z-50 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-[700px] px-6 group-hover:pb-4 group-hover:pt-6 transition-all duration-500"
+            class="absolute shadow-lg bg-white dark:bg-gray-700 space-y-3 lg:top-5 max-lg:top-8 -left-0 min-w-[250px] z-50 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-[700px] px-6 group-hover:pb-4 group-hover:pt-6 transition-all duration-500"
           >
-            <li class="border-b py-2">
-              <a
-                href="javascript:void(0)"
-                data-th-href="@{'/about'}"
-                class="text-blue-600 dark:text-white hover:text-blue-800 dark:hover:text-blue-400 font-semibold block transition-all"
-                >Let's Connect</a
-              >
-            </li>
             <!-- contact  -->
             <!-- <li class='border-b py-2 '><a href='javascript:void(0)'
                           class='text-blue-600 dark:text-white hover:text-blue-800 dark:hover:text-blue-400 font-semibold block transition-all'>Contact</a></li> -->
@@ -107,6 +98,14 @@
                 data-th-href="@{'/register'}"
                 class="text-blue-600 dark:text-white hover:text-blue-800 dark:hover:text-blue-400 font-semibold block transition-all"
                 >Sign up</a
+              >
+            </li>
+            <li class="border-b py-2">
+              <a
+                href="javascript:void(0)"
+                data-th-href="@{'/about'}"
+                class="text-blue-600 dark:text-white hover:text-blue-800 dark:hover:text-blue-400 font-semibold block transition-all"
+                >Let's Connect</a
               >
             </li>
             <!-- <li class='border-b py-2 '><a href='javascript:void(0)'
@@ -133,7 +132,7 @@
           </a>
 
           <ul
-            class="absolute shadow-lg bg-white dark:bg-neutral-800 space-y-3 lg:top-5 max-lg:top-8 -left-0 min-w-[250px] z-50 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-[700px] px-6 group-hover:pb-4 group-hover:pt-6 transition-all duration-500"
+            class="absolute shadow-lg bg-white dark:bg-gray-700 space-y-3 lg:top-5 max-lg:top-8 -left-0 min-w-[250px] z-50 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:max-h-[700px] px-6 group-hover:pb-4 group-hover:pt-6 transition-all duration-500"
           >
             <li class="border-b py-2">
               <a
@@ -145,9 +144,8 @@
             <li class="border-b py-2">
               <a
                 href="javascript:void(0)"
-                data-th-href="@{'/contact'}"
                 class="text-blue-600 dark:text-white hover:text-blue-800 dark:hover:text-blue-400 font-semibold block transition-all"
-                >Contact Export to Excel</a
+                >Contact : Export to Excel</a
               >
             </li>
             <li class="border-b py-2">
@@ -164,11 +162,11 @@
 
     <div class="flex ml-auto">
       <div class="flex gap-4">
-        <a data-th-href="@{'/register'}">
+        <a data-th-href="@{'/login'}">
           <button
             class="bg-blue-100 dark:bg-gray-600 hover:bg-blue-200 dark:hover:bg-blue-500 flex items-center transition-all font-semibold rounded-md px-5 py-3 text-blue-800 dark:text-white"
           >
-            Get started
+            Login
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="w-[14px] fill-current ml-2"
@@ -185,7 +183,7 @@
           data-th-src="@{'/img/lamp.png'}"
           type="button"
           id="theme_change"
-          class="w-10 h-10 rounded-full bg-gray-500 dark:bg-gray-700 text-white dark:text-gray-300 shadow-md dark:shadow-lg transition-transform transform hover:scale-110 active:scale-95"
+          class="w-10 h-10 z-[0] rounded-full bg-gray-500 dark:bg-gray-700 text-white dark:text-gray-300 shadow-md dark:shadow-lg transition-transform transform hover:scale-110 active:scale-95"
           style="border-radius: 50%; /* Makes the button circular */"
         />
         <div>

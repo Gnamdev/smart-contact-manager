@@ -1,5 +1,6 @@
 package com.smartcontactmanager.Helper;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -7,6 +8,9 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 public class CurrentUser {
+
+    @Value("${url.live.domain}")
+    private static String domainName;
 
     public static String getEmailWithLoggedUser(Authentication auth) {
         // AuthenticatedPrincipal principal = (AuthenticatedPrincipal)
@@ -40,7 +44,7 @@ public class CurrentUser {
 
     public static String getLinkForEmailVerificatiton(String emailToken) {
 
-        String link = "http://localhost:8090/auth/verify-email?token=" + emailToken;
+        String link = domainName + "/auth/verify-email?token=" + emailToken;
 
         return link;
 

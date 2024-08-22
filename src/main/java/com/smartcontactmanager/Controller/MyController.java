@@ -34,7 +34,7 @@ public class MyController {
         this.imageService = imageService;
     }
 
-    @RequestMapping("/home")
+    @RequestMapping("")
     public String home(Model model) {
         System.out.println("inside home controller");
 

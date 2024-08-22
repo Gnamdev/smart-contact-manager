@@ -6,6 +6,7 @@ import com.smartcontactmanager.Form.ContactFormData;
 import com.smartcontactmanager.Form.ContactSearchForm;
 import com.smartcontactmanager.Helper.AppConstants;
 import com.smartcontactmanager.Helper.CurrentUser;
+import com.smartcontactmanager.Helper.Message;
 import com.smartcontactmanager.Helper.MessageType;
 import com.smartcontactmanager.services.ContactService;
 import com.smartcontactmanager.services.ImageService;
@@ -101,7 +102,6 @@ public class ContactController {
         ;
         contact.setFavorite(contactFormData.isFavorite());
         contact.setPhoneNumber(contactFormData.getPhoneNumber());
-        contact.setWebsiteLink(contactFormData.getWebsiteLink());
 
         contact.setUser(user);
 
@@ -240,21 +240,19 @@ public class ContactController {
 
         ContactFormData contactForm = new ContactFormData();
 
-        contactForm.setId(contact.getId());
-
         contactForm.setName(contact.getName());
         contactForm.setEmail(contact.getEmail());
         contactForm.setPhoneNumber(contact.getPhoneNumber());
         contactForm.setAddress(contact.getAddress());
         contactForm.setDescription(contact.getDescription());
         contactForm.setFavorite(contact.isFavorite());
-        contactForm.setWebsiteLink(contact.getWebsiteLink());
+        // contactForm.setWebsiteLink(contact.getWebsiteLink());
         contactForm.setLinkedInLink(contact.getLinkedInLink());
         // contactForm.setContactImage(contact.getPicture());
 
         model.addAttribute("contactForm", contactForm);
-        // model.addAttribute("contactId", id);
-        session.setAttribute("contactId", contact.getId());
+        model.addAttribute("contactId", id);
+        // session.setAttribute("contactId", contact.getId());
 
         return "user/update_profile";
     }
@@ -262,14 +260,19 @@ public class ContactController {
     // handelForm
 
     @PostMapping("/update/{id}")
-    public String postMethodName(@PathVariable String id, Model model,
-            @Valid @ModelAttribute("contactForm") ContactFormData contactForm,
-            BindingResult result, @RequestParam("contactImage") MultipartFile multipartFile, HttpSession httpSession) {
+    public String postMethodName(@Valid @ModelAttribute("contactForm") ContactFormData contactForm,
+            BindingResult result,
+            @RequestParam("contactId") String formId,
+            @PathVariable String id, @RequestParam("contactImage") MultipartFile multipartFile,
+            HttpSession httpSession,
+            Model model) {
+
+        String i_d = formId != null ? formId : id; // Ensure ID is not null
 
         if (result.hasErrors()) {
             logger.info("error : {}", result.hasErrors());
 
-            // model.addAttribute("userId", id);
+            model.addAttribute("userId", i_d);
             httpSession.setAttribute("message",
                     com.smartcontactmanager.Helper.Message.builder()
                             .content("Invalid information. please provide correct information !")
@@ -277,7 +280,7 @@ public class ContactController {
             return "user/update_profile";
         }
 
-        Contact con = contactService.getById(id);
+        Contact con = contactService.getById(i_d);
 
         con.setId(id);
         con.setId(id);
@@ -287,7 +290,7 @@ public class ContactController {
         con.setAddress(contactForm.getAddress());
         con.setDescription(contactForm.getDescription());
         con.setFavorite(contactForm.isFavorite());
-        con.setWebsiteLink(contactForm.getWebsiteLink());
+        // con.setWebsiteLink(contactForm.getWebsiteLink());
         con.setLinkedInLink(contactForm.getLinkedInLink());
 
         // process image:
@@ -314,5 +317,84 @@ public class ContactController {
 
         return "redirect:/user/contacts/update/" + id;
     }
+
+    // handler to show updatecontact view
+    // @RequestMapping("/updateView/{contactId}")
+    // public String updateView(@PathVariable("contactId") String contactId, Model
+    // model) {
+
+    // var contact = contactService.getById(contactId);
+
+    // // ContactFormDataValidation contactFormData = new
+    // ContactFormDataValidation();
+
+    // // contactFormData.setName(contact.getName());
+    // // contactFormData.setEmail(contact.getEmail());
+    // // contactFormData.setPhoneNumber(contact.getPhoneNumber());
+    // // contactFormData.setAddress(contact.getAddress());
+    // // contactFormData.setDiscription(contact.getDescription());
+    // // contactFormData.setFavourite(contact.isFavorite());
+    // // contactFormData.setPicture(contact.getPicture());
+
+    // // model.addAttribute("contactForm", contactFormData);
+    // // model.addAttribute("contactId", contactId);
+
+    // return "user/updateFormView";
+    // }
+
+    // // handler for updating the contact
+    // @RequestMapping(value = "updateContact/{contactId}", method =
+    // RequestMethod.POST)
+    // public String updateContact(@Valid @ModelAttribute("contactForm")
+    // ContactFormData contactFormData,
+    // BindingResult result,
+    // @PathVariable("contactId") String contactId, Model model, HttpSession
+    // session) {
+
+    // // form validation logic
+    // // validate form
+    // if (result.hasErrors()) {
+
+    // // model.addAttribute("contactForm", contactFormData);
+
+    // logger.info("erorr in updating contact ----->", result.hasFieldErrors());
+    // return "user/updateFormView";
+    // }
+
+    // var contact = contactService.getById(contactId);
+
+    // contact.setId(contactId);
+    // contact.setName(contactFormData.getName());
+    // contact.setEmail(contactFormData.getEmail());
+    // contact.setPhoneNumber(contactFormData.getPhoneNumber());
+    // contact.setAddress(contactFormData.getAddress());
+    // contact.setDescription(contactFormData.getDescription());
+    // contact.setFavorite(contactFormData.getFavourite());
+
+    // // processing image
+    // if (contactFormData.getContactImage() != null &&
+    // !contactFormData.getContactImage().isEmpty()) {
+    // logger.info("file is not empty");
+    // String fileName = UUID.randomUUID().toString();
+
+    // String imageUrl = imageService.uploadImage(contactFormData.getContactImage(),
+    // fileName);
+    // contact.setCloudinaryImagePublicId(fileName);
+    // contact.setPicture(imageUrl);
+
+    // } else {
+    // logger.info("file is empty");
+    // }
+
+    // var Updatedcon = contactService.update(contact);
+
+    // logger.info("updated contact {}", Updatedcon);
+
+    // session.setAttribute("message",
+    // Message.builder().content("Contact Updated Successfully
+    // !").type(MessageType.green).build());
+
+    // return "redirect:/user/contacts/updateView/" + contactId;
+    // }
 
 }

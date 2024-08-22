@@ -43,7 +43,7 @@ public class SecurityConfiguration {
                     .loginProcessingUrl("/authentication")
                     .usernameParameter("email")
                     .passwordParameter("password")
-                    .successForwardUrl("/user/dashboard")
+                    .successForwardUrl("/user/contacts")
                     .failureForwardUrl("/login?error=true");
 
             formLogin.failureHandler(authFailtureHandler);

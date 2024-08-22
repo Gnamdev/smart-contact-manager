@@ -12,7 +12,9 @@
       <!-- header section  -->
 
       <!-- hero section  -->
-      <div class="lg:min-h-[560px] bg-blue-100 dark:bg-gray-900 px-4 sm:px-10">
+      <div
+        class="lg:min-h-[560px] bg-blue-100 dark:bg-gray-900 px-4 pt-20 sm:px-10"
+      >
         <div class="max-w-7xl w-full mx-auto py-16">
           <div class="grid lg:grid-cols-2 justify-center items-center gap-10">
             <div>
@@ -36,8 +38,9 @@
               <!-- Call to Action Button -->
 
               <div class="flex flex-wrap gap-y-4 gap-x-8 mt-8">
-                <button
-                  class="bg-black hover:bg-[#222] text-white flex items-center transition-all font-semibold rounded-md px-5 py-4"
+                <a
+                  th:href="@{'login'}"
+                  class="bg-black dark:bg-gray-800 hover:bg-[#222] hover:shadow-lg dark:hover:bg-gray-500 text-white flex items-center transition-all font-semibold rounded-md px-5 py-4"
                 >
                   Get started
                   <svg
@@ -50,7 +53,7 @@
                       data-original="#000000"
                     />
                   </svg>
-                </button>
+                </a>
                 <button
                   class="bg-transparent border-2 border-[#333] flex items-center transition-all font-semibold rounded-md px-5 py-2"
                 >
@@ -606,7 +609,7 @@
           </div>
         </div>
 
-        <!-- section-6 -->
+        <!-- section-6
         <div class="border mt-32 px-4 py-12">
           <div
             class="grid sm:grid-cols-2 items-center gap-16 my-6 mx-auto max-w-5xl"
@@ -745,11 +748,11 @@
               </button>
             </form>
           </div>
-        </div>
+        </div> -->
 
         <!-- section - 6.0 team -->
 
-        <div class="mt-32">
+        <!-- <div class="mt-32">
           <div class="sm:max-w-7xl mx-auto">
             <div class="text-center">
               <h2
@@ -762,7 +765,7 @@
             <div
               class="grid lg:grid-cols-2 md:grid-cols-3 sm:grid-cols-2 gap-x-8 gap-y-20 text-center mt-32"
             >
-              <!-- box 1 -->
+             
               <div class="bg-gray-500 relative rounded">
                 <img
                   src="https://readymadeui.com/team-1.webp"
@@ -824,7 +827,7 @@
                   </div>
                 </div>
               </div>
-              <!-- box2 -->
+            
               <div class="bg-gray-500 relative rounded">
                 <img
                   th:src="@{'/img/hulk.jpg'}"
@@ -887,7 +890,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <!-- section - 7 -->
 

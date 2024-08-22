@@ -20,7 +20,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ContactFormData {
 
-    private String id;
+    // private String id;
 
     @NotEmpty(message = "Please provide your first name")
     @Size(min = 3, message = "First name should have at least 3 characters")
@@ -39,7 +39,7 @@ public class ContactFormData {
     private String address;
     private String description;
     private boolean favorite;
-    private String websiteLink;
+
     private String linkedInLink;
 
     private MultipartFile contactImage;
