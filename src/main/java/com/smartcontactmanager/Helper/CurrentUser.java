@@ -44,7 +44,7 @@ public class CurrentUser {
 
     public static String getLinkForEmailVerificatiton(String emailToken) {
 
-        String link = domainName + "/auth/verify-email?token=" + emailToken;
+        String link = "https://smart-contact-manager-amca.onrender.com/auth/verify-email?token=" + emailToken;
 
         return link;
 
