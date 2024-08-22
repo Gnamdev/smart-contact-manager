@@ -31,6 +31,9 @@ public class SecurityConfiguration {
         // rangenge
         httpSecurity.authorizeHttpRequests(authorize -> {
             // authorize.requestMatchers("/home", "/register", "/services").permitAll();
+            authorize.requestMatchers("/login", "/register", "/services", "/css/**", "/js/**", "/images/**")
+                    .permitAll();
+
             authorize.requestMatchers("/user/**").authenticated();
             authorize.anyRequest().permitAll();
         });

@@ -63,7 +63,7 @@ public class MyController {
         return "contact";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String loginPage() {
 
         // System.out.println("login page");
