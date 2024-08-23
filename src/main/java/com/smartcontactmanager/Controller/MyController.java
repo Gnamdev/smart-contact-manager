@@ -88,6 +88,17 @@ public class MyController {
 
         System.out.println("User-controller " + "------>" + userFormData);
 
+        User mailAlreadyExist = userServices.getUserByEmail(userFormData.getEmail());
+
+        if (mailAlreadyExist != null) {
+            Message mgs = Message.builder()
+                    .content("This email id already use , please provide another mail id  !")
+                    .type(MessageType.red)
+                    .build();
+            session.setAttribute("message", mgs);
+
+            return "register";
+        }
         // validate
         if (errors.hasErrors()) {
 
@@ -150,6 +161,16 @@ public class MyController {
             return "register";
         }
 
+    }
+
+    @GetMapping("/success")
+    public String getSuccessPage() {
+        return "success";
+    }
+
+    @GetMapping("/error")
+    public String getMethodName() {
+        return "error";
     }
 
 }

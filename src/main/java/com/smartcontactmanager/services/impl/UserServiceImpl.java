@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserServices {
 
         // userfound.setProvide(user.getProvide());
         userfound.setActive(user.isEnabled());
-        userfound.setRole(user.getRole());
+        // userfound.setRole(user.getRole());
 
         userfound.setProviderId(user.getProviderId());
 

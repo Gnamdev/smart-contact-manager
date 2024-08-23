@@ -41,7 +41,7 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler {
         user.setRolesList(List.of(AppConstants.ROLE_USER));
 
         user.setActive(true);
-        user.setRole(AppConstants.ROLE_USER);
+        // user.setRole(AppConstants.ROLE_USER);
         user.setEmailVerified(true);
         user.setPassword("password");
         user.setEmailVerified(true);

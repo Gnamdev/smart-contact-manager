@@ -17,13 +17,8 @@ import org.springframework.data.domain.Pageable;
 @Repository
 public interface ContactRepo extends JpaRepository<Contact, String> {
 
-    // boolean existsByUserIdAndEmailOrPhoneNumber(User user, String email, String
-    // phoneNumber);
+    Contact findByEmail(String email);
 
-    // @Query("SELECT c FROM Contact c WHERE c.userId = :userId")
-    // boolean existsByUserIdAndEmailOrPhoneNumber(@Param("userId") String userId,
-    // @Param("email") String email,
-    // @Param("phoneNumber") String phoneNumber);
     boolean existsByUserIdAndEmailOrPhoneNumber(String userId, String email, String phoneNumber);
 
     Page<Contact> findByUser(User user, Pageable pageable);

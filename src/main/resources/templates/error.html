@@ -5,12 +5,12 @@
   th:replace="~{Base :: parent(~{:: #content} , ~{::title},~{::script})}"
 >
   <head>
-    <title>contact page</title>
+    <title>error page</title>
   </head>
   <body>
     <section id="content">
       <div
-        class="bg-gray-200 w-full px-16 md:px-0 h-screen flex items-center justify-center"
+        class="bg-gray-200 dark:bg-gray-700 w-full px-16 md:px-0 h-screen flex items-center justify-center"
       >
         <div
           class="bg-white mt-10 border border-gray-200 flex flex-col items-center justify-center px-4 md:px-8 lg:px-24 py-8 rounded-lg shadow-2xl"
@@ -36,7 +36,7 @@
           </p>
           <a
             href="#"
-            data-th-href="@{'/home'}"
+            data-th-href="@{'/'}"
             class="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 mt-6 rounded transition duration-150"
             title="Return Home"
           >

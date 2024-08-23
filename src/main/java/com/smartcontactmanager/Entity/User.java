@@ -120,7 +120,7 @@ public class User implements UserDetails {
 
     private String lastName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -130,7 +130,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String phoneNumber;
 
-    private String role;
+    // private String role;
 
     private String picture;
     private String cloudinaryImagePublicId;

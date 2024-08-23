@@ -8,6 +8,7 @@ import com.smartcontactmanager.Helper.AppConstants;
 import com.smartcontactmanager.Helper.CurrentUser;
 import com.smartcontactmanager.Helper.Message;
 import com.smartcontactmanager.Helper.MessageType;
+import com.smartcontactmanager.repositories.ContactRepo;
 import com.smartcontactmanager.services.ContactService;
 import com.smartcontactmanager.services.ImageService;
 import com.smartcontactmanager.services.UserServices;
@@ -43,6 +44,9 @@ public class ContactController {
     private ContactService contactService;
 
     @Autowired
+    private ContactRepo contactRepo;
+
+    @Autowired
     private ImageService imageService;
 
     @Autowired
@@ -65,6 +69,18 @@ public class ContactController {
 
         // String filename = UUID.randomUUID().toString();
         String id = UUID.randomUUID().toString();
+
+        Contact byEmail = contactRepo.findByEmail(contactFormData.getEmail());
+
+        if (byEmail != null) {
+            Message mgs = Message.builder()
+                    .content("This email id already use , please provide another mail id  !")
+                    .type(MessageType.red)
+                    .build();
+            session.setAttribute("message", mgs);
+
+            return "user/add_contact";
+        }
 
         if (result.hasErrors()) {
 
@@ -212,9 +228,9 @@ public class ContactController {
             byId.setLinkedInLink("--");
 
         }
-        if (byId.getWebsiteLink().isEmpty()) {
-            byId.setWebsiteLink("--");
-        }
+        // if (byId.getWebsiteLink().isEmpty()) {
+        // byId.setWebsiteLink("--");
+        // }
 
         model.addAttribute("veiwData", byId);
 

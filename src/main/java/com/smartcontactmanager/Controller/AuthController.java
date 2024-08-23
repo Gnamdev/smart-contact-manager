@@ -39,7 +39,7 @@ public class AuthController {
             return "success";
         }
 
-        return "error_page";
+        return "error";
     }
 
 }

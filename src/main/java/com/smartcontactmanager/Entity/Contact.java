@@ -30,7 +30,7 @@ public class Contact {
 
     private String description;
     private boolean favorite = false;
-    private String websiteLink;
+
     private String linkedInLink;
     private String picture;
 
@@ -44,8 +44,9 @@ public class Contact {
     // @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch =
     // FetchType.EAGER, orphanRemoval = true)
 
-    @OneToMany(mappedBy = "contact", fetch = FetchType.EAGER, orphanRemoval = true)
+    // @OneToMany(mappedBy = "contact", fetch = FetchType.EAGER, orphanRemoval =
+    // true)
 
-    private List<SocialLinks> links = new ArrayList<>();
+    // private List<SocialLinks> links = new ArrayList<>();
 
 }
