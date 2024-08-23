@@ -77,6 +77,6 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler {
             logger.info("user saved by Custom login " + user.getEmail());
         }
 
-        new DefaultRedirectStrategy().sendRedirect(request, response, "/user/profile");
+        new DefaultRedirectStrategy().sendRedirect(request, response, "/user/contacts");
     }
 }
