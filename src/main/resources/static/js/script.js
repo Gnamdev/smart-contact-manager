@@ -1,44 +1,48 @@
 console.log("script loaded");
 
-let currentTheme = getData();
-console.log(currentTheme);
+document.addEventListener("DOMContentLoaded", () => {
+    let currentTheme = getData(); // Get the theme from localStorage or default to light
+    console.log("Current theme:", currentTheme);
 
-changeTheme(currentTheme);
+    // Apply the initial theme on page load
+    changeTheme(currentTheme);
+
+    // Add the click event listener once when the DOM is fully loaded
+    const themeChangeButton = document.querySelector("#theme_change");
+    themeChangeButton.addEventListener("click", handleThemeChange);
+});
 
 function changeTheme(theme) {
-    const htmlElement = document.querySelector('html');
+    const htmlElement = document.querySelector("html");
     const themeChangeButton = document.querySelector("#theme_change");
 
-    htmlElement.classList.remove('light', 'dark');
-    htmlElement.classList.add(theme);
+    // Remove any existing theme classes ('light', 'dark')
+    htmlElement.classList.remove("light", "dark");
+    htmlElement.classList.add(theme); // Apply the new theme
 
-    themeChangeButton.src = theme === 'light' ? '/img/lamp.png' : '/img/dark-mode.png';
+    // Set the correct image based on the theme
+    themeChangeButton.src = theme === "light" ? "/img/lamp.png" : "/img/dark-mode.png";
 
-    themeChangeButton.removeEventListener('click', handleThemeChange);
-    themeChangeButton.addEventListener('click', handleThemeChange);
+    // Save the theme to localStorage
+    setData(theme);
 }
 
 function handleThemeChange() {
-    const htmlElement = document.querySelector('html');
-    const themeChangeButton = document.querySelector("#theme_change");
+    const htmlElement = document.querySelector("html");
+    let currentTheme = htmlElement.classList.contains("dark") ? "dark" : "light";
+    let newTheme = currentTheme === "dark" ? "light" : "dark"; // Toggle the theme
 
-    let currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
-    let newTheme = currentTheme === "dark" ? "light" : "dark";
-
-    htmlElement.classList.remove(currentTheme);
-    htmlElement.classList.add(newTheme);
-
-    themeChangeButton.src = newTheme === 'light' ? '/img/lamp.png' : '/img/dark-mode.png';
-    setData(newTheme);
+    // Apply the new theme
+    changeTheme(newTheme);
 }
 
+// Function to store the theme in localStorage
 function setData(theme) {
     localStorage.setItem("theme", theme);
 }
 
+// Function to get the theme from localStorage
 function getData() {
     let data = localStorage.getItem("theme");
-    return data ? data : "light";
+    return data ? data : "light"; // Default to light if no theme is saved
 }
-
-document.querySelector("#theme_change").src = currentTheme === 'light' ? '/img/lamp.png' : '/img/dark-mode.png';
