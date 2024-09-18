@@ -32,7 +32,6 @@ public class AuthFailtureHandler implements AuthenticationFailureHandler {
             // user is disabled
             HttpSession session = request.getSession();
 
-            System.out.println("session -- " + session);
             session.setAttribute("message",
                     Message.builder()
                             .content("Varification link is sent on your Email !")

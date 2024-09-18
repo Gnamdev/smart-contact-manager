@@ -25,11 +25,6 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void sendMail(String to, String subject, String message) {
 
-        // if (!isValidEmail(to)) {
-        // System.out.println("Invalid email address: " + to);
-        // return;
-        // }
-
         try {
 
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -38,7 +33,7 @@ public class EmailServiceImpl implements EmailService {
             simpleMailMessage.setText(message);
             simpleMailMessage.setFrom(domainName);
 
-            simpleMailMessage.setFrom("no-reply@yourdomain.com");
+            // simpleMailMessage.setFrom("no-reply@yourdomain.com");
 
             javaMailSender.send(simpleMailMessage);
 
