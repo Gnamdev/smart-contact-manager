@@ -1,6 +1,6 @@
 // // delete contact
 
-const baseURL ="http://localhost:8090";
+const baseURL ="https://smart-contact-manager-amca.onrender.com/";
 
 
 // async function deleteContact(id) {
